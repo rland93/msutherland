@@ -1,0 +1,181 @@
+
+@font-face {
+  font-family: 'MonaSpace Argon';
+  src: url('/fonts/MonaSpaceArgon.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('/fonts/SourceSerif4.ttf') format('truetype');
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-size: 1.4em;
+  margin: 0;
+  min-height: 100%;
+  overflow-wrap: break-word;
+}
+
+.post-meta {
+  text-align: right;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: sans-serif;
+}
+
+h1 {
+  font-weight: 900;
+  letter-spacing: 0.1rem;
+}
+
+
+
+h2,
+h3 {
+  font-weight: 700;
+}
+
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
+
+h3,
+h4 {
+  font-style: italic;
+}
+
+p,
+ul li,
+ol li,
+blockquote,
+pre,
+table,
+code,
+hr,
+img,
+figcaption {
+  font-family: "MonaSpace Argon", monospace;
+  font-kerning: auto;
+  font-optical-sizing: auto;
+  font-weight: 300;
+}
+
+hr {
+  margin: 2rem 0;
+  
+}
+
+p {
+  margin: 2rem 0;
+  line-height: 1.4em;
+}
+
+header p {
+  margin: 0;
+  font-style: italic;
+}
+
+li {
+  margin: 0.4rem 0;
+}
+
+*:target {
+  background: yellow;
+}
+
+main {
+  max-width: 44em;
+  margin: 1rem auto 25rem;
+}
+
+header {
+  max-width: 40em;
+  margin: 4rem auto 4rem;
+}
+
+.toc {
+  border: thin solid black;
+  padding: 1rem;
+}
+
+hr {
+  text-align: center;
+  border: 0;
+
+  &:before {
+    content: '/////'
+  }
+
+  &:after {
+    content: attr(data-content) '/////'
+  }
+}
+
+pre {
+  background: black;
+  padding: 1em;
+  overflow-x: auto;
+  /* Fix pre content overflowing parent without scroll bar */
+}
+
+#post-list span {
+  font-variant-ligatures: none;
+}
+
+
+table {
+  width: 100%;
+}
+
+table,
+th,
+td {
+  border: thin solid black;
+  border-collapse: collapse;
+  padding: 0.4rem;
+}
+
+code:not(pre > code) {
+  padding: 0.1em 0.2em;
+  font-size: 90%;
+}
+
+code.has-jax {
+  -webkit-font-smoothing: antialiased;
+  background: inherit !important;
+  border: none !important;
+  font-size: 100%;
+}
+
+blockquote {
+  font-style: italic;
+  border: thin solid black;
+  padding: 1rem;
+
+  p {
+    margin: 0;
+  }
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+figcaption {
+  text-align: center;
+  opacity: 0.5;
+}
