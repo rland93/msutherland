@@ -1,0 +1,7 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = "mike's website"
+theme = 'nostyle'
+
+[params]
+description = 'a place where mike talks about computers'
