@@ -1,9 +1,15 @@
 ---
-title: "My PCB"
+title: "OllyFC V1 Schematics and Layout"
 date: 2024-01-08
 tags: ['projects']
 draft: False
 ---
+# OllyFC v1
+
+This is a post containing the images of one early rev of ollyfc v1.
+
+I got some feedback on this design [on reddit.com/r/PrintedCircuitBoard](https://www.reddit.com/r/PrintedCircuitBoard/comments/1927ujb/stm32based_flight_computer/). Just needed a place to park the images.
+
 ## 3-D Render
 
 ![](/img/2024-pcb_review/pcb_review_22.png)

@@ -27,16 +27,29 @@
 {{ end }}
 
 <ul id="post-list">
+    <li class="post-list-item">
+        <span class="post-list-date list-header">date</span>
+        <span class="post-list-link list-header" href="#">link</span>
+        <span class="post-list-series list-header">series</span>
+    </li>
     {{- range $post := $posts -}}
-    <li>
-        <span>{{- ($post.Date | time.Format site.Params.theme_config.date_format) }}</span>
-        <a href="{{ $post.Permalink | relURL }}">{{ $post.Title }}</a>
+    <li class="post-list-item">
+        <span class="post-list-date">{{- ($post.Date | time.Format site.Params.theme_config.date_format) }}</span>
+        <a class="post-list-link" href="{{ $post.Permalink | relURL }}">{{ $post.Title }}</a>
+        {{- if $post.Params.series }}
+        <span class="post-list-series">({{ $post.Params.series }})</span>
+        {{- else}}
+        <span class="post-list-series"></span>
+        {{- end }}
     </li>
     {{ end }}
     {{- if and .show_more $limit_exceeded }}
-    <li><a href="{{ .show_more_url | relURL }}">{{ .show_more_text | default "Show more..." }}</a></li>
+    <span class="post-list-date"></span>
+    <li class="post-list-link"><a href="{{ .show_more_url | relURL }}">{{ .show_more_text | default "Show more..."
+            }}</a></li>
+    <span class="post-list-series"></span>
     {{ end }}
 </ul>
 {{ $js := resources.Get "js/align_titles.js" | resources.Minify}}
-<script src="{{ $js.Permalink }}"></script>
+<!-- <script src="{{ $js.Permalink }}"></script> -->
 {{ end }}

@@ -17,7 +17,7 @@ So that's one reason I like datasheets. They're written for me, a technical pers
 
 There's another reason I like datasheets. And that is that it makes the power of computers very legible. I wasn't alive when such things were actually printed out and mailed, but there is something about a 3,000 page datasheet that makes you really *think* about how much power is in that tiny silicon die. It's a dense 3,000 pages. If you wanted to write a book that was 3,000 pages long, you would spend quite a long time. To make a chip with a datasheet 3,000 pages long, not only do you need to write the datasheet -- you also have to make the chip!
 
-In my early use of using computers, I knew they held within much complexity. But there is nothing like reading a long datasheet to really step back and internalize just how much complexity is there.
+I knew from the beginning that computers were complex. But there is nothing like reading a long datasheet to really step back and internalize just how much complexity is there.
 
 That doesn't even cover software complexity, of course. A datasheet doesn't even capture the programs that can run on a chip -- just what you can do with the chip and its registers!
 

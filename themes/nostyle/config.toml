@@ -32,7 +32,7 @@
   [params.theme_config]
     appearance = "auto"
     back_home_text = "<<<"
-    date_format = "2006 January"
+    date_format = "Jan '06"
     show_description = true
     logo = "wizard.png"
   

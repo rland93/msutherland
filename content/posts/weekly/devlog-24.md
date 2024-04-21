@@ -2,7 +2,7 @@
 title: "My 2024 Goals"
 date: 2023-12-31
 tags: ["programming", "rust"]
-draft: False
+draft: True
 author: Mike Sutherland
 series: "weekly devlogs"
 ---

@@ -1,0 +1,19 @@
+<header>
+	<h1><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
+	<span class="dir">///</span>
+	{{ with .Site.Menus.main }}
+	<nav>
+		<ul>
+			{{ range . }}
+			<li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>
+			{{ end }}
+		</ul>
+	</nav>
+	{{ end }}
+</header>
+<!-- Render subtitle -->
+{{ with .Site.Params.description }}
+<div class="subtitle">
+	<p class="description">{{ . }}</p>
+</div>
+{{ end }}

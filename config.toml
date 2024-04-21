@@ -4,4 +4,42 @@ title = "mike's website"
 theme = 'nostyle'
 
 [params]
-description = 'a place where mike talks about computers'
+description = 'embedded, robots, rust'
+
+[menu]
+  [[menu.main]]
+        identifier = "posts"
+        name = "posts"
+        url = "/posts/"
+        weight = 1
+
+  [[menu.main]]
+        identifier = "info"
+        name = "info"
+        url = "/info/"
+        weight = 2
+
+  [[menu.main]]
+        identifier = "tags"
+        name = "tags"
+        url = "/tags/"
+        weight = 3
+
+
+[[menu.main]]
+identifier = "blog"
+name = "Blog"
+url = "/blog/"
+weight = 4
+[menu.main.post_list]
+section = "blog"
+limit = 5
+show_more = true
+show_more_url = "/blog/all"
+show_more_text = "View All Posts"
+
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

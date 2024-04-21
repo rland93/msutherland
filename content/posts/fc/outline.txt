@@ -1,0 +1,40 @@
+    Project Name: Ollie FC
+    Objective: Build a flight computer from scratch using embedded Rust.
+    Purpose:
+        Explore engineering design and embedded systems through a hands-on project.
+        Evaluate the suitability of Rust for complex embedded systems beyond basic applications.
+        Engage with RC planes, focusing on the design and automation aspects rather than manual control.
+    Long-Term Goals:
+        Apply control systems and feedback control knowledge to a practical project.
+        Design a glider capable of maximizing flight time by efficiently loitering in a single area.
+    Methodology:
+        Document the project through YouTube vlogs to track progress.
+        Write blog posts for in-depth exploration of conceptual topics not suited for video content.
+    Project Significance:
+        Offers a personal challenge and a platform for learning and applying embedded Rust.
+        Aims to combine technical skills with a passion for RC aviation in an innovative way.
+
+
+
+    Custom Hardware Decision:
+        Inspired by professional experience and project cancellation.
+        Focus on custom hardware for reliability and design challenges.
+    Challenges with Prototyping:
+        Unreliable mechanical connections in prototype stages.
+        The necessity for a more stable and efficient design solution.
+    PCB Design Journey:
+        Motivated to explore PCBs after discovering cost-effective production options.
+        Self-taught PCB design in three months, leveraging resources like Hacker News articles and JLCPCB services.
+    Design Process Insights:
+        Emphasizes the accessibility and affordability of PCB design for hobbyists and students.
+        Highlights the engaging aspects of PCB design, including schematic view and routing.
+        Differentiates between low-speed and high-speed board design requirements.
+    Software and Tools:
+        Utilized KiCad, an open-source EDA tool, for PCB design.
+        Distinguished the simplicity of low-speed designs suitable for beginners.
+    Challenges and Learnings:
+        Encountered a critical mistake by omitting the boot pin in the first PCB design iteration.
+        Adjusted design in the second revision, emphasizing the learning curve and the cost-effective nature of the mistake.
+    Next Steps:
+        Awaiting the second revision of the Ollie FC board from production.
+        Plans for a detailed introduction to the V2 board in upcoming posts.

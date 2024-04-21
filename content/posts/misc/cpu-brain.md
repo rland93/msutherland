@@ -1,8 +1,8 @@
 ---
 title: "Metaphors: Computer Brain"
-date: 2022-6-4
+date: 2022-06-04
 tags: ['misc']
-draft: False
+draft: True
 author: Mike Sutherland
 ---
 
