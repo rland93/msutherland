@@ -12,7 +12,7 @@ She is best known for her work on VLSI, (and only recently) for inventing the fi
 
 ![Diagram of a single chip, embedded within a larger layout, on a shared wafer](/img/lynn-conway-vlsi.png)
 
-Above: diagram of a single chip, embedded within a larger layout, on a shared wafer.
+Above: diagram of a single chip, embedded within a larger layout, on a shared wafer. Among the first of countless billions of VLSI chips to be made
 
 Here, she explains the symbiotic codevelopment of chip design (specifically, VLSI) and ARPANET, the precursor to the internet:
 
