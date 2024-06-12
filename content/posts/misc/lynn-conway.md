@@ -8,11 +8,13 @@ author: Mike Sutherland
 
 Lynn Conway passed away today, 6/11/2024.
 
+She is best known for her work on VLSI, (and only recently) for inventing the first superscalar architecture, among many other things.
+
 ![Diagram of a single chip, embedded within a larger layout, on a shared wafer](/img/lynn-conway-vlsi.png)
 
 Above: diagram of a single chip, embedded within a larger layout, on a shared wafer.
 
-Here is a 2018 quote from her, she explains the symbiotic codevelopment of chip design (specifically, VLSI) and ARPANET, the precursor to the internet:
+Here, she explains the symbiotic codevelopment of chip design (specifically, VLSI) and ARPANET, the precursor to the internet:
 
 > Envision the symbiotic co-evolution of VLSI and the ARPANET. If you take one run through this as sort of one cycle at one node of silicon design, each major iteration of this technosocial system, the VLSI chips embedded in computer workstations and ARPANET routers and servers enabled the design of VLSI chips for more powerful workstations, routers and servers, which you then embed into the next iteration of the game. So the game is re-run using the next node's VLSI chips. ...
 
@@ -28,7 +30,7 @@ Here is a 2018 quote from her, she explains the symbiotic codevelopment of chip 
 
 Lynn Conway, [4].
 
-Incredible, visionary stuff. For another century of technosocial change, we owe you, Lynn. 
+Visionary stuff, more true today than in 1979. For another century of technosocial change, we owe you, Lynn. 
 
 --- 
 
