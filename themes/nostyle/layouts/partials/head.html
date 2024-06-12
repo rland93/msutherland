@@ -20,6 +20,5 @@
   <link rel="stylesheet" href='{{ $css.Permalink }}' />
   {{ if .Params.mathjax }} {{ partial "mathjax.html" . }} {{ end }}
 
-  {{ $resize := resources.Get "js/resizeimg.js" }}
-  <script src='{{ $resize.Permalink }}' defer></script>
+
 </head>

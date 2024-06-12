@@ -181,14 +181,9 @@ blockquote {
 
 img {
   display: block; 
-  margin: 0 auto;
-  object-fit: cover; 
-  object-position: center; 
-  height: auto;
-  border: 2px solid #1f1f21;
-  margin-bottom: 0;
+  max-width: 100%;
 }
-
+/*
 figcaption {
   display:block;
   color: #151617;
@@ -197,4 +192,4 @@ figcaption {
   border: 2px solid #1f1f21;
   border-top: none;
   background-color: #ccc;
-}
+} */
