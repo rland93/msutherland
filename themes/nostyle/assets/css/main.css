@@ -1,11 +1,25 @@
+@font-face {
+  font-family: 'Open Gorton';
+  src: url('/fonts/OpenGorton-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 html {
   height: 100%;
+  font-size: 16px;
 }
 
 body {
   margin: 0;
+  padding-bottom: 30rem;
   min-height: 100%;
   overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.5;
+  color: #203;
 }
 
 .post-meta {
@@ -24,6 +38,26 @@ h6 {
 h1 {
   font-weight: 900;
   letter-spacing: 1px;
+  font-family: "Open Gorton", sans-serif;
+  line-height: 1.2;
+  margin: 1.5em 0 0.75em;
+}
+
+p,
+ul li,
+ol li,
+blockquote,
+pre,
+table,
+code,
+hr,
+img,
+figcaption {
+  font-family: system-ui, -apple-system, serif;
+  font-kerning: auto;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  max-width: 68ch;
 }
 
 
@@ -44,29 +78,6 @@ h4 {
   font-style: italic;
 }
 
-p,
-ul li,
-ol li,
-blockquote,
-pre,
-table,
-code,
-hr,
-img,
-figcaption {
-  font-family: serif;
-  font-kerning: auto;
-  font-optical-sizing: auto;
-  font-weight: 300;
-}
-
-hr {
-  
-}
-
-p {
-}
-
 header p {
   font-style: italic;
 }
@@ -79,7 +90,8 @@ header p {
 
 main {
   max-width: 600px;
-  margin: 12px auto 12px;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
 header {
@@ -105,7 +117,8 @@ hr {
   }
 }
 
-pre, code {
+pre,
+code {
   font-family: "Monaco", "Consolas", monospace;
 }
 
@@ -126,21 +139,36 @@ ul#post-list {
 
 #post-list {
   display: grid;
-  grid-template-columns: 6em 1fr auto;
+  grid-template-columns: 5rem 2fr 1fr;
   gap: 10px;
 }
 
 .post-list-item {
-  display: contents; /* Make the <li> not affect layout */
+  display: contents;
+  /* Make the <li> not affect layout */
 }
 
-.post-list-date, .post-list-link, .post-list-series {
-  white-space: nowrap; /* Prevent wrapping */
-  overflow: hidden; /* Hide overflow */
-  text-overflow: ellipsis; 
+.post-list-date,
+.post-list-link,
+.post-list-series {
+  white-space: nowrap;
+  /* Prevent wrapping */
+  overflow: hidden;
+  /* Hide overflow */
+  text-overflow: ellipsis;
 }
 
-.post-list-date.list-header, .post-list-link.list-header, .post-list-series.list-header {
+.post-list-series {
+  min-width: none;
+}
+
+.post-list-date {
+  min-width: 30em;
+}
+
+.post-list-date.list-header,
+.post-list-link.list-header,
+.post-list-series.list-header {
   font-weight: 700;
   border-bottom: 2px solid #101010;
 }
@@ -171,18 +199,31 @@ code.has-jax {
 
 blockquote {
   font-style: italic;
-  border: thin solid black;
-  padding: 1rem;
+
+  border: 2px solid #191b27;
+  padding: 1.2rem;
+  /* margin: 1.5em 0; */
 
   p {
-    margin: 0;
+    margin-bottom: 0.6em;
+    font-family: serif;
+    font-size: 1.2rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 
 img {
-  display: block; 
+  display: block;
   max-width: 100%;
 }
+
 /*
 figcaption {
   display:block;
