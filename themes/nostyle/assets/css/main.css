@@ -1,14 +1,57 @@
+/* Marcellus - Classical elegance for headlines */
 @font-face {
-  font-family: 'Open Gorton';
-  src: url('/fonts/OpenGorton-Bold.otf') format('opentype');
+  font-family: 'Marcellus';
+  src: url('/fonts/Marcellus-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Quattrocento Sans - Warm, humanist body text */
+@font-face {
+  font-family: 'Quattrocento Sans';
+  src: url('/fonts/QuattrocentoSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Quattrocento Sans';
+  src: url('/fonts/QuattrocentoSans-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Quattrocento Sans';
+  src: url('/fonts/QuattrocentoSans-Bold.ttf') format('truetype');
   font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Quattrocento Sans';
+  src: url('/fonts/QuattrocentoSans-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Fira Code - Geometric precision for code */
+@font-face {
+  font-family: 'Fira Code';
+  src: url('/fonts/FiraCode-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 300 700;
   font-style: normal;
   font-display: swap;
 }
 
 html {
   height: 100%;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 body {
@@ -18,8 +61,21 @@ body {
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
-  line-height: 1.5;
-  color: #203;
+  line-height: 1.65;
+  color: #3a3632;
+  background-color: #faf8f3;
+  font-family: 'Quattrocento Sans', sans-serif;
+}
+
+a {
+  color: #8b7355;
+  text-decoration: none;
+  border-bottom: 1px solid #c9c4bc;
+}
+
+a:hover {
+  color: #6b5745;
+  border-bottom-color: #8b7355;
 }
 
 .post-meta {
@@ -32,14 +88,14 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: sans-serif;
+  font-family: 'Marcellus', serif;
+  font-weight: 400;
+  line-height: 1.3;
 }
 
 h1 {
-  font-weight: 900;
-  letter-spacing: 1px;
-  font-family: "Open Gorton", sans-serif;
-  line-height: 1.2;
+  font-size: 2.5rem;
+  letter-spacing: 0.5px;
   margin: 1.5em 0 0.75em;
 }
 
@@ -53,7 +109,7 @@ code,
 hr,
 img,
 figcaption {
-  font-family: system-ui, -apple-system, serif;
+  font-family: 'Quattrocento Sans', sans-serif;
   font-kerning: auto;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -62,20 +118,27 @@ figcaption {
 
 
 
-h2,
-h3 {
-  font-weight: 700;
+h2 {
+  font-size: 2rem;
+  margin: 1.3em 0 0.6em;
 }
 
-h4,
+h3 {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin: 1.2em 0 0.5em;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-style: italic;
+  margin: 1.1em 0 0.5em;
+}
+
 h5,
 h6 {
-  font-weight: 500;
-}
-
-h3,
-h4 {
-  font-style: italic;
+  font-size: 1.1rem;
+  margin: 1em 0 0.5em;
 }
 
 header p {
@@ -85,7 +148,7 @@ header p {
 
 
 *:target {
-  background: yellow;
+  background: #efe7d5;
 }
 
 main {
@@ -100,13 +163,15 @@ header {
 }
 
 .toc {
-  border: thin solid black;
+  border: 1px solid #c9c4bc;
   padding: 12px;
+  background: #f4f1ea;
 }
 
 hr {
   text-align: center;
   border: 0;
+  color: #ada599;
 
   &:before {
     content: '/////'
@@ -119,7 +184,8 @@ hr {
 
 pre,
 code {
-  font-family: "Monaco", "Consolas", monospace;
+  font-family: 'Fira Code', monospace;
+  font-variant-ligatures: normal;
 }
 
 strong {
@@ -127,7 +193,8 @@ strong {
 }
 
 pre {
-  background: black;
+  background: #2d2a27;
+  color: #e8e3d8;
   padding: 1em;
   overflow-x: auto;
 }
@@ -170,7 +237,7 @@ ul#post-list {
 .post-list-link.list-header,
 .post-list-series.list-header {
   font-weight: 700;
-  border-bottom: 2px solid #101010;
+  border-bottom: 2px solid #ada599;
 }
 
 table {
@@ -180,14 +247,21 @@ table {
 table,
 th,
 td {
-  border: thin solid black;
+  border: 1px solid #c9c4bc;
   border-collapse: collapse;
   padding: 0.4rem;
+}
+
+th {
+  background: #f4f1ea;
+  font-weight: 700;
 }
 
 code:not(pre > code) {
   padding: 0.1em 0.2em;
   font-size: 90%;
+  background: #f0ebe1;
+  color: #4a4340;
 }
 
 code.has-jax {
@@ -199,15 +273,15 @@ code.has-jax {
 
 blockquote {
   font-style: italic;
-
-  border: 2px solid #191b27;
+  border: 2px solid #ada599;
+  background: #f4f1ea;
   padding: 1.2rem;
   /* margin: 1.5em 0; */
 
   p {
     margin-bottom: 0.6em;
-    font-family: serif;
-    font-size: 1.2rem;
+    font-family: 'Quattrocento Sans', sans-serif;
+    font-size: 1.1rem;
 
     &:first-child {
       margin-top: 0;
