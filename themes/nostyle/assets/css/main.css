@@ -62,20 +62,20 @@ body {
   word-wrap: break-word;
   hyphens: auto;
   line-height: 1.65;
-  color: #3a3632;
-  background-color: #faf8f3;
+  color: #3d3935;
+  background-color: #e8e4db;
   font-family: 'Quattrocento Sans', sans-serif;
 }
 
 a {
-  color: #8b7355;
+  color: #7a6854;
   text-decoration: none;
-  border-bottom: 1px solid #c9c4bc;
+  border-bottom: 1px solid #b5aea3;
 }
 
 a:hover {
-  color: #6b5745;
-  border-bottom-color: #8b7355;
+  color: #5c503f;
+  border-bottom-color: #8b7f6f;
 }
 
 .post-meta {
@@ -148,7 +148,7 @@ header p {
 
 
 *:target {
-  background: #efe7d5;
+  background: #d9d4c8;
 }
 
 main {
@@ -163,15 +163,16 @@ header {
 }
 
 .toc {
-  border: 1px solid #c9c4bc;
+  border: 1px solid #c2bdb0;
+  border-left: 4px solid #7a9178;
   padding: 12px;
-  background: #f4f1ea;
+  background: #ddd9cf;
 }
 
 hr {
   text-align: center;
   border: 0;
-  color: #ada599;
+  color: #9a9287;
 
   &:before {
     content: '/////'
@@ -193,10 +194,11 @@ strong {
 }
 
 pre {
-  background: #2d2a27;
-  color: #e8e3d8;
+  background: #35322e;
+  color: #d6d2c7;
   padding: 1em;
   overflow-x: auto;
+  border-left: 3px solid #8b6f54;
 }
 
 ul#post-list {
@@ -237,7 +239,7 @@ ul#post-list {
 .post-list-link.list-header,
 .post-list-series.list-header {
   font-weight: 700;
-  border-bottom: 2px solid #ada599;
+  border-bottom: 2px solid #9a9287;
 }
 
 table {
@@ -247,21 +249,22 @@ table {
 table,
 th,
 td {
-  border: 1px solid #c9c4bc;
+  border: 1px solid #c2bdb0;
   border-collapse: collapse;
   padding: 0.4rem;
 }
 
 th {
-  background: #f4f1ea;
+  background: #ddd9cf;
   font-weight: 700;
+  border-top: 3px solid #9d7b5a;
 }
 
 code:not(pre > code) {
   padding: 0.1em 0.2em;
   font-size: 90%;
-  background: #f0ebe1;
-  color: #4a4340;
+  background: #ddd9cf;
+  color: #3d3935;
 }
 
 code.has-jax {
@@ -273,8 +276,9 @@ code.has-jax {
 
 blockquote {
   font-style: italic;
-  border: 2px solid #ada599;
-  background: #f4f1ea;
+  border: 2px solid #9a9287;
+  border-left: 4px solid #b8754e;
+  background: #ddd9cf;
   padding: 1.2rem;
   /* margin: 1.5em 0; */
 
