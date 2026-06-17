@@ -1,5 +1,5 @@
 ---
-title: "The Phone Self-Thing"
+title: "Phone-Thing, Self-Thing"
 date: 2026-06-17
 tags: ['commentary']
 draft: False
