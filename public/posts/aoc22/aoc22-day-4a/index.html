@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="description" content="Problem Statement
+Each pair of numbers in the list indicates a range, so 6-8 indicates 6, 7, and 8. There are two pairs per list item. We want to distinguish pairs like 5-7,4-8 &ndash; in those cases, 5-7 entirely overlaps 4-8, from a pair like 5-7 and 6-8, for which 5 and 8 do not overlap. Our end result should be a final count of every completely overlapping set."> 
+
+  <title>
+    
+    AoC &#39;23 4A
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  <link rel="stylesheet" href='http://localhost:1313/css/main.css' />
+  
+
+
+</head><body a="auto"><header>
+  
+
+  <h1>mike&#39;s website</h1><p>writing, mostly about technology</p></header><main class="page-content" aria-label="Content">
+<a href="/">&lt;&lt;&lt;</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2023-02-12 00:00:00 &#43;0000 UTC">
+            Feb &#39;23
+        </time>
+    </p>
+
+    <h1>AoC &#39;23 4A</h1>
+
+    
+
+
+    <h2 id="problem-statement">Problem Statement</h2>
+<p>Each pair of numbers in the list indicates a range, so 6-8 indicates 6, 7, and 8. There are two pairs per list item. We want to distinguish pairs like <code>5-7,4-8</code> &ndash; in those cases, 5-7 entirely overlaps 4-8, from a pair like <code>5-7</code> and <code>6-8</code>, for which <code>5</code> and <code>8</code> do not overlap. Our end result should be a final count of every completely overlapping set.</p>
+<p>Here is the example puzzle input:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>2-4,6-8
+</span></span><span style="display:flex;"><span>2-3,4-5
+</span></span><span style="display:flex;"><span>5-7,7-9
+</span></span><span style="display:flex;"><span>2-8,3-7
+</span></span><span style="display:flex;"><span>6-6,4-6
+</span></span><span style="display:flex;"><span>2-6,4-8
+</span></span></code></pre></div><h2 id="approach">Approach</h2>
+<p>So here, there are a couple of ways to go: I could use <code>HashSet</code> again, and check if one set is a subset of another. So, assuming we have <code>A</code> and <code>B</code>, we can check: <code>(A is a subset of B OR B is a subset of A).</code> This would filter matches properly.</p>
+<p>However, it might be inefficient to create two HashSets for every comparison. While using HashSets would be useful as a general strategy, our problem has a more specific structure: the elements are already sorted; we know the upper and lower bounds for each pair! This extra structure allows us to do what we need only with some clever arithmetic.</p>
+<p>We&rsquo;ll start by noticing that we can easily obtain the size of the two sets by subtracting the upper element from the lower element of each. If we say that set \(A\) is the larger set and set \(B\) is the smaller set, then we can determine the necessary and sufficient conditions for a valid pair. We&rsquo;ll also say that each has an upper and lower bound, \(u\) and \(l\). So \(u_A\) is the upper bound of A, and so on.</p>
+<p>Let&rsquo;s establish a proposition. Given that \(A \) is larger (has more elements) than \(B\):</p>
+<p>$$ u_A \geq u_B \land l_A \leq l_B \implies B \subseteq A $$</p>
+<p>To prove this:</p>
+<ul>
+<li>assume that \( B \subseteq A \) but \( u_A &lt; u_B \lor l_A &gt; l_B \) (the opposite of our proposition)</li>
+<li>If \( u_A &lt; u_B \), that means that there is some element, \( u_B \), that is not contained in \(A\), because \(u_B\) is greater than \(A\)&rsquo;s largest element.</li>
+<li>This is a contradiction, because we said that \( B \subseteq A \).</li>
+<li>Or, if \( l_A &gt; l_B \), that means that there is some element \(l_B\) that is not in \(A\).</li>
+<li>Again, a contradiction, because we said that \( B \subseteq A \).</li>
+</ul>
+<p>With this proof in our pocket, we are ready to devise an algorithm:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">part_one</span>(input):
+</span></span><span style="display:flex;"><span>    count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> input:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># get elements</span>
+</span></span><span style="display:flex;"><span>        l1, l2 <span style="color:#f92672">=</span> line[<span style="color:#ae81ff">0</span>], line[<span style="color:#ae81ff">2</span>]
+</span></span><span style="display:flex;"><span>        l3, l4 <span style="color:#f92672">=</span> line[<span style="color:#ae81ff">4</span>], line[<span style="color:#ae81ff">6</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># find which set has more elements</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> l2<span style="color:#f92672">-</span>l1 <span style="color:#f92672">&gt;=</span> l4<span style="color:#f92672">-</span>l3:
+</span></span><span style="display:flex;"><span>            u_a, l_a <span style="color:#f92672">=</span> l2, l1
+</span></span><span style="display:flex;"><span>            u_b, l_b <span style="color:#f92672">=</span> l4, l3
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            u_a, l_a <span style="color:#f92672">=</span> l4, l3
+</span></span><span style="display:flex;"><span>            u_b, l_b <span style="color:#f92672">=</span> l2, l1
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># filter</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> l_a <span style="color:#f92672">&lt;=</span> l_b <span style="color:#f92672">and</span> u_a <span style="color:#f92672">&gt;=</span> u_b:
+</span></span><span style="display:flex;"><span>            count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> count
+</span></span></code></pre></div><p>Since we&rsquo;re only doing some basic arithmetic for each line, this algorithm runs in \(O(n)\) time. Assuming we&rsquo;ve done our proof correctly, this will get us the count that we need!</p>
+<h2 id="solution">Solution</h2>
+<p>Unlike extracting characters, like we did in the rock-paper-scissors game before, we actually need to match digits, because digits can be 1+ characters: like 5, or 50, or 500. For this, then, we use the <code>regex</code> crate. I really like Rust&rsquo;s packaging system. All it took was <code>cargo add regex</code> and we&rsquo;re off to the races.</p>
+<p>Now, <code>regex</code> compiles its patterns when the program is run. Here&rsquo;s the code to extract the digits from a line of text from our puzzle input (remember that a line looks like <code>3-15,6-10</code>):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">use</span> lazy_static::lazy_static;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> regex::Regex;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">get_digits</span>(text: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; (<span style="color:#66d9ef">u32</span>, <span style="color:#66d9ef">u32</span>, <span style="color:#66d9ef">u32</span>, <span style="color:#66d9ef">u32</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">lazy_static!</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">ref</span> <span style="color:#66d9ef">RE</span>: <span style="color:#a6e22e">Regex</span> <span style="color:#f92672">=</span> Regex::new(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;(\d+)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> matches <span style="color:#f92672">=</span> <span style="color:#66d9ef">RE</span>.find_iter(text);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> a: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> matches.next().unwrap().as_str().parse().unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> b: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> matches.next().unwrap().as_str().parse().unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> c: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> matches.next().unwrap().as_str().parse().unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> d: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> matches.next().unwrap().as_str().parse().unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (a, b, c, d)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We use the <code>lazy_static</code> crate to ensure that the compilation that occurs on line 6 only occurs once &ndash; even though <code>Regex::new()</code> is called many times in a loop when our program reads each line from the input.</p>
+<p>We can trust that the input will have exactly 4 digits and no more, so we can use <code>.unwrap()</code> to shorten the code. But in a general case &ndash; like if we were parsing text, we would need to catch all of the potential degenerate lines. What if one of our inputs was <code>4-5,mike-10</code>?</p>
+<p>The rest follows from the proof we sketched above. We again use the functional notation to just sum everything into <code>res</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">part_one</span>(input: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; Option<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">u32</span><span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> res:<span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> input.lines().map(get_digits).map(<span style="color:#f92672">|</span>d<span style="color:#f92672">|</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> l_a:<span style="color:#66d9ef">u32</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> l_b:<span style="color:#66d9ef">u32</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> u_a:<span style="color:#66d9ef">u32</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> u_b:<span style="color:#66d9ef">u32</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> d.<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> d.<span style="color:#ae81ff">0</span> <span style="color:#f92672">&gt;</span> d.<span style="color:#ae81ff">3</span> <span style="color:#f92672">-</span> d.<span style="color:#ae81ff">2</span> {
+</span></span><span style="display:flex;"><span>            l_a <span style="color:#f92672">=</span> d.<span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            u_a <span style="color:#f92672">=</span> d.<span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            l_b <span style="color:#f92672">=</span> d.<span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>            u_b <span style="color:#f92672">=</span> d.<span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            l_a <span style="color:#f92672">=</span> d.<span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>            u_a <span style="color:#f92672">=</span> d.<span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>            l_b <span style="color:#f92672">=</span> d.<span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            u_b <span style="color:#f92672">=</span> d.<span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> l_a <span style="color:#f92672">&lt;=</span> l_b <span style="color:#f92672">&amp;&amp;</span> u_a <span style="color:#f92672">&gt;=</span> u_b {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }).sum();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Some(res)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Onto the next!</p>
+</article>
+
+    </main>
+</body></html>

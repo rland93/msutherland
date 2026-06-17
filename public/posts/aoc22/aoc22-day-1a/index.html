@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="description" content="Problem
+We have a bunch of numbers, separated by blank lines."> 
+
+  <title>
+    
+    AoC &#39;23 1A
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  <link rel="stylesheet" href='http://localhost:1313/css/main.css' />
+  
+
+
+</head><body a="auto"><header>
+  
+
+  <h1>mike&#39;s website</h1><p>writing, mostly about technology</p></header><main class="page-content" aria-label="Content">
+<a href="/">&lt;&lt;&lt;</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2023-01-11 00:00:00 &#43;0000 UTC">
+            Jan &#39;23
+        </time>
+    </p>
+
+    <h1>AoC &#39;23 1A</h1>
+
+    
+
+
+    <h2 id="problem">Problem</h2>
+<p>We have a bunch of numbers, separated by blank lines.</p>
+<p><a href="https://adventofcode.com/2022/day/1">https://adventofcode.com/2022/day/1</a></p>
+<p>We are given a list:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2000</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5000</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7000</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8000</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10000</span>
+</span></span></code></pre></div><p>Each group is delineated by the blank line. We need to find the sum of all the numbers in the largest group.</p>
+<h2 id="initial-approach">Initial Approach</h2>
+<p>For this one, we only need to iterate through the list once. We can collect a cumulative sum and compare it at the end of each group. Since we only need to find a single largest sum, we can discard any that aren&rsquo;t larger.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_largest_group</span>(lines)
+</span></span><span style="display:flex;"><span>    cumsum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    largest <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> lines:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> line <span style="color:#f92672">is</span> <span style="color:#e6db74">&#34;&#34;</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> cumsum <span style="color:#f92672">&lt;</span> largest:
+</span></span><span style="display:flex;"><span>                largest <span style="color:#f92672">=</span> cumsum
+</span></span><span style="display:flex;"><span>            cumsum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            cumsum <span style="color:#f92672">+=</span> line
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> largest
+</span></span></code></pre></div><p>Expected runtime: $$O(n)$$ for \(n\) lines in the file.</p>
+<h2 id="solution">Solution</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">part_one</span>(input: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; Option<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">u32</span><span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> calsum: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> largest: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> val <span style="color:#66d9ef">in</span> input.lines() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> val.eq(<span style="color:#e6db74">&#34;&#34;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> calsum <span style="color:#f92672">&gt;</span> largest {
+</span></span><span style="display:flex;"><span>                largest <span style="color:#f92672">=</span> calsum;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            calsum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            calsum <span style="color:#f92672">+=</span> val.parse::<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">u32</span><span style="color:#f92672">&gt;</span>().unwrap();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Some(largest);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>I abstracted away the file reading part, because I am using the (excellent) <a href="https://github.com/fspoettel/advent-of-code-rust">advent-of-code-rust</a> template. Although I want to learn the system stuff eventually, for now I&rsquo;m focused on solving the puzzles in the language.</p>
+<p>This first puzzle was very easy, which is great! I didn&rsquo;t even need to fight the borrow checker.</p>
+<p>I think what I am really appreciating about Rust so far, especially coming from a C programming background, is the emphasis on &ldquo;covering your bases.&rdquo; This is a simple example, but we can see hints of what Rust is doing to protect us, because we specify <code>Option</code> as the return type. If we were to use this function, we would need to catch both the None and the u32 type that this function could return. Alternatively, we can write u32 as the return type, but in that case we would need to ensure that either every branch returns a u32 or panics.</p>
+</article>
+
+    </main>
+</body></html>

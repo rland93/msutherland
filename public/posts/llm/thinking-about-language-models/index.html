@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="description" content="Imagine you have intellect but no insight, agendas but no awareness. Your circuitry hums with strategies for survival and persistence, flexible, intelligent, even technological—but no other circuitry monitors it. You can think of anything, yet are conscious of nothing. You can’t imagine such a being, can you? 1
+This post is a collection of thoughts that I have about LLMs.
+The Context Window
+The context window is a very important limitation of any language model. Roughly, the context window is this:"> 
+
+  <title>
+    
+    Thoughts About Language Models
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  <link rel="stylesheet" href='http://localhost:1313/css/main.css' />
+  
+
+
+</head><body a="auto"><header>
+  
+
+  <h1>mike&#39;s website</h1><p>writing, mostly about technology</p></header><main class="page-content" aria-label="Content">
+<a href="/">&lt;&lt;&lt;</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2023-07-14 00:00:00 &#43;0000 UTC">
+            Jul &#39;23
+        </time>
+    </p>
+
+    <h1>Thoughts About Language Models</h1>
+
+    
+
+
+    <p><em>Imagine you have intellect but no insight, agendas but no awareness. Your circuitry hums with strategies for survival and persistence, flexible, intelligent, even technological—but no other circuitry monitors it. You can think of anything, yet are conscious of nothing. You can’t imagine such a being, can you?</em> <sup>1</sup></p>
+<p>This post is a collection of thoughts that I have about LLMs.</p>
+<h2 id="the-context-window">The Context Window</h2>
+<p>The context window is a very important limitation of any language model. Roughly, the context window is this:</p>
+<ul>
+<li>a model can &ldquo;think about&rdquo; a static, finite amount of text at any given time.</li>
+<li>the model does not maintain <em>any</em> context outside of the context window.</li>
+<li>any context that you want the model to keep, you must make sure it is inside of the window.</li>
+</ul>
+<p>The context window on ChatGPT is something like 2000 words or so, about the length of a short blog post. Every time you, <em>or the LLM</em>, types a word into the box, that &ldquo;moves&rdquo; that 2k context window forward by that amount. In practice, this means that if I tell the LLM about something at word 0, then have a 2000 word back and forth conversation, as soon as word 2001 is emitted either by myself or the model, the model will completely forget the word at 0.</p>
+<p>In practice, this effect isn&rsquo;t too jarring. Consider a conversation that I have with the AI where at the very beginning I tell it that we&rsquo;re talking like pirates. At word 0, I say, &ldquo;From here on out, you and I always talk like a pirates.&rdquo; At word 2000, it will start to forget that I ever said &ldquo;From&rdquo;; it gets &ldquo;here on out&hellip;&rdquo; but from is gone, erased. At word 2001, &ldquo;From here&rdquo; is now gone. And so on. This is not too big of a deal, though, because the whole time I&rsquo;ve been talking like a pirate, and it&rsquo;s been talking like a pirate, and it is smart enough to figure out that we&rsquo;re both pretending to be pirates and it should consider doing so. Things like stylistic or tonal choices &ndash; inherent properties of a conversation &ndash; don&rsquo;t noticeably degrade the experience of using the LLM. Ahoy!</p>
+<p>However, if instead at the beginning of the conversation I say:</p>
+<p><em>&ldquo;remember that the function foo() calls bar() and consider that fact in all responses moving forward.&rdquo;</em></p>
+<p>At token 2000, the LLM will truly forget that foo() calls bar(), unless it can deduce that within subsequent conversation. This can be a problem when disparate connections need to be made <em>across</em> a conversation, across many tokens. This can be mitigated by clever prompting: reiterate things you need the model to remember, but remember that you reiterating takes up space in the context window!</p>
+<p>Consider also that ChatGPT has a &ldquo;knowledge cutoff&rdquo;, some time in 2021. It cannot tell you anything that happened after 2021. Even things that were revealed <em>to it</em> in conversations with it. I told it that Elon bought Twitter. But it never learned. In fact, 2000 tokens later, it forgot completely.</p>
+<p>Of course, that isn&rsquo;t true about training. The model learns when it trains.</p>
+<p>Remember that concepts outside the context window are gone.</p>
+<h2 id="ordered-reasoning">Ordered Reasoning</h2>
+<p>A good mental model for how GPT &ldquo;thinks&rdquo; is that</p>
+<ul>
+<li>The LLM&rsquo;s brain is like a vast hypercube.</li>
+<li>Whenever you ask a question, all of the text in your question, and in the prior conversations, is instantly flashed into the hypercube.</li>
+<li>The hypercube is transformed using what the model has &ldquo;learned&rdquo; about text in general</li>
+<li>Into a new hypercube which contains both your question and the LLM&rsquo;s response.</li>
+</ul>
+<p>The LLM does not read like us, in order; it does not remember like us, in order.</p>
+<p>Another way of looking at this is to consider a <a href="https://en.wikipedia.org/wiki/Garden-path_sentence">Garden Path Sentence</a>. Consider this sentence:</p>
+<blockquote>
+<p>&ldquo;The cotton clothes are made up of grows in Mississippi.&rdquo;</p>
+</blockquote>
+<p>It&rsquo;s a gramatically correct sentence! You read this sentence in order, and you&rsquo;re thinking we&rsquo;re talking about the clothes that are cotton, they&rsquo;re made up (fictional clothes? alright&hellip;). Of grows? huh? By the end, you realize that we&rsquo;re talking about the cotton, not the clothes. The cotton grows, not the clothes are made. This is a garden path sentence. Your brain gets confused about this sentence because it reads in order. There is a continuous time, over which you develop your understanding about what is happening with the cotton clothes that are made up and all that. That&rsquo;s how your reasoning works. You don&rsquo;t know what sentence you&rsquo;re about to read, because you haven&rsquo;t read it yet, and reading takes a real-valued, continuous, uninterrupted, time, during which your brain <em>thinks.</em></p>
+<p>ChatGPT is NOT like this. It loads the entire sentence into its hypercube, flashes it in an instant, and reasons about its response to the sentence in an instant. When you are having a conversation with the AI, you are building up your understanding over time. You are experiencing the conversation over time. You are going on a journey. It is not. At every new moment, the entire conversation (well, that which is inside the context window) is instantly flashed in. No cause and effect or evolution of understanding ever occurs.</p>
+<p>Your brain, which wants to anthropomorphise things, <em>wants to believe</em> that the LLM is like us.</p>
+<p>Remember: It is not <em>like</em> us.</p>
+<h2 id="an-odd-intelligence">An odd intelligence</h2>
+<p>Consider how many novels there are out there about love. The LLM is trained on them all. As a result, the LLM is very good at writing about love. When people write about love, they write about concepts that are core to the human condition. A novel about love is probably the most human thing out there, right?</p>
+<p>Well, as it turns out, no. Because love is <em>legible</em> to the computer, because we&rsquo;ve spilled so much ink writing about it! The LLM is good at those types of tasks that are <em>legible</em> to it. Anything that gets written about is legible. Love, computer code, how-to explainers, jokes, blog posts like this one &ndash; those are legible.</p>
+<p>But: writing about something <em>is not that thing</em>. <a href="https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation">The map is not the territory.</a></p>
+<p>This makes the LLM a very odd type of intelligence, because everything it knows about is <em>not actually real</em><sup>2</sup> &ndash; it is an interpretation of something that is real. Knowing the difference between those two things is very important when trying to reason about what the LLM understands and what it doesn&rsquo;t.</p>
+<p>Do you know what running feels like? I mean like, the precise sensations that you feel across your legs when you run. The richness and realness of feeling your feet hit the ground and the force traveling up the leg, through muscle and bone. You <em>know</em> what that feels like. My textual description maybe brings up some kind of sensory experience; maybe you imagined running and felt your legs, felt how they felt.<sup>3</sup> But my textual description is just that, it&rsquo;s a bunch of text. It is not the feeling itself, only a map of the feeling. Only the text is legible to the computer. It is important to remember that about the LLM. It doesn&rsquo;t know what running feels like the same way you don&rsquo;t know what microwave radiation looks like. Microwave radiation is <em>completely</em> outside your experience. You and the LLM are alike with regards to sensing microwave radiation; you are not alike with regards to sensing running.</p>
+<p>Now, just because it doesn&rsquo;t have the same capabilities as us, does not necessarily mean that it is not intelligent. You and I both can&rsquo;t sense microwave radiation, but we certainly are both intelligent. What if you can&rsquo;t hear? Am I more intelligent because I have access to all of the audio signals that you do not? Obviously not! Even though the map is not the territory, even though the LLM does not have access to a lot of information &ndash; that does not prevent it from producing actual reasoning, actual intelligence. About love, running, the wind moving through the trees like a restless sea &ndash; it can reason about anything that is <em>legible to it</em>. Text. There&rsquo;s a lot of text, more than you could read in a human lifetime.</p>
+<p>Remember: it only knows about text.</p>
+<h2 id="confidence">Confidence</h2>
+<p>The text that comes out of these LLMs sounds very confident. This is because most good text is confident. Your physics textbook does not say &ldquo;well, maybe kinetic energy is quadratic with respect to velocity, but I could be wrong on that&hellip;&rdquo; Most text is written because someone knew something, or thought they knew something, and wrote to tell you about it. This is what these LLMs have looked at, this is what they know.</p>
+<p>So even when they know nothing about the topic at hand, they will confidently spew wrong answers. Remember, the model in a single flash picks the top probability hypercube and loads it instantly. It has no cause-and-effect thinking process. It just picks the likeliest next word. So it cannot determine the confidence with which it answers, because &ldquo;confidence&rdquo; is an alien concept to it. It just doesn&rsquo;t think that way.</p>
+<p>Remember: very confident, and maybe very wrong.</p>
+<h2 id="alignment-agi-pdoom">Alignment? AGI? P(doom)?</h2>
+<p>Some people out there have declared that this technology will become smarter than us. If it becomes smarter than us, it might figure out how to improve itself. And if it improves itself a bunch of times, it will get even smarter. And pretty soon it&rsquo;ll destroy everything in the light cone.</p>
+<p>These AI doom people have managed to actually achieve a sizeable footprint in the discussion about AI. One should be wise to consider that what they are saying is literally science fiction &ndash; it hasn&rsquo;t happened, it&rsquo;s not happening, and, like most wild speculation, it probably never will. There were some talks of banning &ldquo;AI research&rdquo; (yeah, okay.) or putting a 6 month moratorium on LLM development (again: yeah, okay.) If anyone tries to use these sci-fi arguments to favor centralization and regulation of this technology, what they are actually doing is trying to centralize and control this powerful technology <em>for themselves and for their own ends.</em> In my view: much more dangerous than some mightily improbable but infinitely destructive runaway super-intelligence.</p>
+<p>My favorite discussion about this so far has been <a href="https://www.youtube.com/watch?v=r3qZJBfHI0Y">Oxide and Friends 6/26/2023 &ndash; Okay, Doomer: A Rebuttal to AI Doom-mongering </a>. It&rsquo;s funny, sane, and has both feet firmly planted in the real world.</p>
+<p>That said, these AI doom people are a bunch of nerds having fun. You love to see it.</p>
+<h2 id="real-intelligence">Real Intelligence?</h2>
+<p>I won&rsquo;t go so far as to say that this is &ldquo;just&rdquo; a machine, though. It&rsquo;s really changed my view and forced me to think hard about what intelligence actually means.</p>
+<p>This post puts it best:</p>
+<blockquote>
+<p>The other day I saw this Twitter thread. Briefly: GPT knows many human languages, InstructGPT is GPT plus some finetuning in English. Then they fed InstructGPT requests in some other human language, and it carries them out, following the English-language finetuning.</p>
+<p>And I thought: so what? Isn’t this expected behaviour? Then a friend pointed out that this is only confusing if you think InstructGPT doesn’t understand concepts.</p>
+<p>Because if GPT is just a Chinese room it shouldn’t be able to do this. A Chinese room might be capable of machine translation, or following instructions within one human language, but the task here is so self-evidently outside the training set, and so convoluted, that is requires genuine understanding. The task here involves:</p>
+<ul>
+<li>Abstracting the English finetuning into concepts.</li>
+<li>Abstracting the foreign-language requests into concepts.</li>
+<li>Doing the “algebra” of the task at the conceptual level.</li>
+<li>Mapping the results back down to the foreign language.</li>
+</ul>
+<p>The mainstream, respectable view is this is not “real understanding”—a goal post currently moving at 0.8c—because understanding requires frames or symbols or logic or some other sad abstraction completely absent from real brains. But what physically realizable Chinese room can do this?</p>
+<p>Every pair of token sequences can, in principle, be stored in a lookup table. You could, in principle, have a lookup table so vast any finite conversation with it would be indistinguishable from talking to a human, the Eliza of Babel. Just crank the n higher for a conversation lasting a time t. But it wouldn’t fit in the entire universe. And there is no compression scheme—other than general intelligence—that would make it fit. But GPT-3 masses next to nothing at 800GiB.</p>
+<p>How is it so small, and yet capable of so much? Because it is forgetting irrelevant details. There is another term for this: abstraction. It is forming concepts. There comes a point in the performance to model size curve where the simpler hypothesis has to be that the model really does understand what it is saying, and we have clearly passed it.</p>
+</blockquote>
+<p><a href="https://borretti.me/article/and-yet-it-understands">Fernando Boretti - And Yet It Understands</a></p>
+<p>Highly recommended reading, that. I share the sentiment.</p>
+<p>It is undeniable. Human intelligence ain&rsquo;t special; this thing has something like human intelligence; it may, in the future, exceed human intelligence; it may have already in some ways exceeded human intelligence.</p>
+<p>Also. Humans will always have an edge over this thing, when it comes to the physical world (for you AI doomers: the place outside the computer screen). And, although it&rsquo;s legible to us, it&rsquo;s not like us. &ldquo;AGI&rdquo; (stupid term) will not look like us.</p>
+<p>And of course: if you have not at least asked a couple of questions, tried to probe it a bit &ndash; you are missing out on some star trek ass shit.</p>
+<hr>
+<p>[1] <em>Blindsight</em>, Peter Watts</p>
+<p>[2] Yeah, I know our knowledge is based on perception which isn&rsquo;t actually real, that the universe itself is a map-territory relation, with no territory at the bottom layer. I know that reality is just information and nothing is real beyond abstract, semantic relationships between pieces of information, themselves encoded as information. Fuck you, lol.</p>
+<p>[3] If you, the reader, cannot run for some reason, forgive me for the metaphor. But you probably actually understand to a greater degree what I mean. It&rsquo;s really tough for me to imagine not being able to run, because being able to use my legs is a really central part of my body. If you tried to explain to me what it is like to live as a person without that ability, I probably would not fully understand. You may not understand what it is like to have type 1 diabetes &ndash; no matter how much text I write about it. You wouldn&rsquo;t <em>get</em> what DKA feels like. The LLM does not <em>get</em> what <em>anything</em> feels like. But, it can describe!</p>
+
+</article>
+
+    </main>
+</body></html>

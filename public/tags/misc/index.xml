@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Misc on mike&#39;s website</title>
+		<link>http://localhost:1313/tags/misc/</link>
+		<description>Recent content in Misc on mike&#39;s website</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 29 Jan 2025 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/misc/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>DeepSeek-R1 is cute</title>
+				<link>http://localhost:1313/posts/deepseek-is-cute/</link>
+				<pubDate>Wed, 29 Jan 2025 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/deepseek-is-cute/</guid>
+				<description>&lt;p&gt;DeepSeek-R1 (the model) is cute.&lt;/p&gt;&#xA;&lt;p&gt;I have an RTX3090, so I can run fairly large models at home. I have an ollama server set up, so I have direct access to the new models. Of course, when DeepSeek dropped, I downloaded it immediately. So the model is: &lt;code&gt;deepseek-r1:32b&lt;/code&gt;, this is a distillation of Qwen2.5-32b, which is an LLM developed by the Chinese company Alibaba cloud. So they say: Qwen (通义千问) chat &amp;amp; pre-trained large language model proposed by Alibaba Cloud.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Lynn Conway</title>
+				<link>http://localhost:1313/posts/misc/lynn-conway/</link>
+				<pubDate>Tue, 11 Jun 2024 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/misc/lynn-conway/</guid>
+				<description>&lt;p&gt;Lynn Conway passed away today, 6/11/2024.&lt;/p&gt;&#xA;&lt;p&gt;She is best known for her work on VLSI, (and only recently) for inventing the first superscalar architecture, among many other things.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/lynn-conway-vlsi.png&#34; alt=&#34;Diagram of a single chip, embedded within a larger layout, on a shared wafer&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Above: diagram of a single chip, embedded within a larger layout, on a shared wafer. Among the first of countless billions of VLSI chips to be made&lt;/p&gt;&#xA;&lt;p&gt;Here, she explains the symbiotic codevelopment of chip design (specifically, VLSI) and ARPANET, the precursor to the internet:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>finding ten billion transistors on the ground</title>
+				<link>http://localhost:1313/posts/misc/mobile-phone/</link>
+				<pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/misc/mobile-phone/</guid>
+				<description>&lt;p&gt;I was biking a few days ago. In the roadway, I spotted what looked like a mobile phone. Once it was safe I went over, and sure enough, a phone. I wasn&amp;rsquo;t sure what type of phone it was but I picked it up.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>opinionated author wikipedia: common ostritch</title>
+				<link>http://localhost:1313/posts/misc/wikipedia-ostritch/</link>
+				<pubDate>Sat, 05 Feb 2022 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/misc/wikipedia-ostritch/</guid>
+				<description>&lt;p&gt;I love reading wikipedia articles that are written very obviously by a single person who is highly passionate about some obscure topic. You only need to read one to understand why it&amp;rsquo;s such an awesome thing. I&amp;rsquo;m collecting these, so if you see one shoot me an email or something. This post is part of a series about such articles.&lt;/p&gt;&#xA;&lt;h2 id=&#34;ostritches&#34;&gt;Ostritches&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Common_ostrich&#34;&gt;https://en.wikipedia.org/wiki/Common_ostrich&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Saved version, in case some wikipedia mod rewrites it: &lt;a href=&#34;https://web.archive.org/web/20220205024712/https://en.wikipedia.org/wiki/Common_ostrich&#34;&gt;https://web.archive.org/web/20220205024712/https://en.wikipedia.org/wiki/Common_ostrich&lt;/a&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

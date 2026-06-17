@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Rust on mike&#39;s website</title>
+		<link>http://localhost:1313/tags/rust/</link>
+		<description>Recent content in Rust on mike&#39;s website</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 03 Jul 2023 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Rust, 6 Months In</title>
+				<link>http://localhost:1313/posts/programming/rust-6mo-in/</link>
+				<pubDate>Mon, 03 Jul 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/programming/rust-6mo-in/</guid>
+				<description>&lt;p&gt;I&amp;rsquo;ve been writing a lot of Rust lately. If you are a programmer, you have probably heard of Rust:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;it&amp;rsquo;s amazing!&lt;/li&gt;&#xA;&lt;li&gt;it&amp;rsquo;s really hard&lt;/li&gt;&#xA;&lt;li&gt;it&amp;rsquo;s safe. safe safe safe memory safety no memory corruption no use after free safe&lt;/li&gt;&#xA;&lt;li&gt;it&amp;rsquo;s amazing!&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Well, yes. These things are true. But that&amp;rsquo;s not all that I like about Rust.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m a pretty new programmer. I mean, I&amp;rsquo;ve been messing with computers for quite a while now, but I don&amp;rsquo;t have a hefty CS background. I don&amp;rsquo;t know a whole lot about programming languages &amp;ndash; although I am learning. During the day, I write mostly C, with some javascript and some python.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 5A</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-5a/</link>
+				<pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-5a/</guid>
+				<description>&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;We are given an initial state and an ordered set of moves. The state are items in &amp;ldquo;crates&amp;rdquo; &amp;ndash; &lt;code&gt;[P]&lt;/code&gt; is a crate, for example.&lt;/p&gt;&#xA;&lt;p&gt;We are then asked to make the moves on the initial state; e.g. &lt;code&gt;move 1 from 2 to 1&lt;/code&gt; calculate the next state. We repeat this process until we reach the terminal state. When we have the terminal stat&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [D]&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[N] [C]&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[Z] [M] [P]&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 1   2   3&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;move 1 from 2 to 1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;move 3 from 1 to 3&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;move 2 from 2 to 1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;move 1 from 1 to 2&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 4B</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-4b/</link>
+				<pubDate>Tue, 14 Feb 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-4b/</guid>
+				<description>&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;In part 4 B, just like in part A, we need to find overlaps. But now, rather than a subset, we need to find an intersection.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 4A</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-4a/</link>
+				<pubDate>Sun, 12 Feb 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-4a/</guid>
+				<description>&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;Each pair of numbers in the list indicates a range, so 6-8 indicates 6, 7, and 8. There are two pairs per list item. We want to distinguish pairs like &lt;code&gt;5-7,4-8&lt;/code&gt; &amp;ndash; in those cases, 5-7 entirely overlaps 4-8, from a pair like &lt;code&gt;5-7&lt;/code&gt; and &lt;code&gt;6-8&lt;/code&gt;, for which &lt;code&gt;5&lt;/code&gt; and &lt;code&gt;8&lt;/code&gt; do not overlap. Our end result should be a final count of every completely overlapping set.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 3B</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-3b/</link>
+				<pubDate>Tue, 07 Feb 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-3b/</guid>
+				<description>&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;This is a similar problem to 3A.&lt;/p&gt;&#xA;&lt;p&gt;Now, rather than compare between slices for each line, we are comparing between lines. We are comparing groupings of 3 lines. What we aim to do is find the score of the common item for each 3 lines and add it to the accumulator, just like in the previous problem.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 3A</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-3a/</link>
+				<pubDate>Mon, 06 Feb 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-3a/</guid>
+				<description>&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;We have a big list. Each item in the list is a duo of collections. Each of these collections has a single item (only one?) in common. Here&amp;rsquo;s my example puzzle input:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 2A</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-2a/</link>
+				<pubDate>Wed, 25 Jan 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-2a/</guid>
+				<description>&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;Once again, we have a text file (I&amp;rsquo;m noticing a pattern). Day 2 is a rock-paper-scissors game. We are given a &amp;ldquo;strategy guide&amp;rdquo;:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 2B</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-2b/</link>
+				<pubDate>Wed, 25 Jan 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-2b/</guid>
+				<description>&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;Still a rock-paper-scissors game. But do we get a new ruleset, no! My&#xA;abstracting the ruleset was all for naught. We are given the same &amp;ldquo;strategy guide&amp;rdquo;:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 1B</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-1b/</link>
+				<pubDate>Thu, 12 Jan 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-1b/</guid>
+				<description>&lt;h2 id=&#34;problem&#34;&gt;Problem&lt;/h2&gt;&#xA;&lt;p&gt;This problem is similar to problem 1A. We have this big list of numbers:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 1A</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-1a/</link>
+				<pubDate>Wed, 11 Jan 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-1a/</guid>
+				<description>&lt;h2 id=&#34;problem&#34;&gt;Problem&lt;/h2&gt;&#xA;&lt;p&gt;We have a bunch of numbers, separated by blank lines.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>i am doing advent of code in rust</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22_prelude/</link>
+				<pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22_prelude/</guid>
+				<description>&lt;h2 id=&#34;prelude&#34;&gt;Prelude&lt;/h2&gt;&#xA;&lt;p&gt;This is the first post in a series of (hopefully 50!) posts. I am going to use the Advent of Code as my &amp;ldquo;homework&amp;rdquo; for learning the systems programming language Rust. Advent of Code is a thing that some smart people do every year where they come up with a series of clever puzzles and then release them every day for 25 days, starting on December 1.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

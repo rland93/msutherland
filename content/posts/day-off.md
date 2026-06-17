@@ -3,6 +3,7 @@ title: "Can we have the day off?"
 date: 2026-05-27
 tags: ['rants']
 draft: False
+series: tech essays
 ---
 
 So, apparently we are at the cusp of the entire world's white collar workforce

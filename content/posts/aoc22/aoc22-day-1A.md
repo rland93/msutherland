@@ -5,7 +5,7 @@ tags: ["programming", "rust", "aoc22"]
 draft: False
 author: Mike Sutherland
 math: true
-series: "advent of code in rust"
+series: aoc journal
 ---
 
 ## Problem

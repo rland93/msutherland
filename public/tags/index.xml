@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Tags on mike&#39;s website</title>
+		<link>http://localhost:1313/tags/</link>
+		<description>Recent content in Tags on mike&#39;s website</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 17 Jun 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Commentary</title>
+				<link>http://localhost:1313/tags/commentary/</link>
+				<pubDate>Wed, 17 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/commentary/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Rants</title>
+				<link>http://localhost:1313/tags/rants/</link>
+				<pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/rants/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ChatGPT</title>
+				<link>http://localhost:1313/tags/chatgpt/</link>
+				<pubDate>Mon, 13 Oct 2025 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/chatgpt/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Literature</title>
+				<link>http://localhost:1313/tags/literature/</link>
+				<pubDate>Wed, 19 Feb 2025 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/literature/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Software</title>
+				<link>http://localhost:1313/tags/software/</link>
+				<pubDate>Fri, 14 Feb 2025 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/software/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Misc</title>
+				<link>http://localhost:1313/tags/misc/</link>
+				<pubDate>Wed, 29 Jan 2025 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/misc/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Flight Computer</title>
+				<link>http://localhost:1313/tags/flight-computer/</link>
+				<pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/flight-computer/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Projects</title>
+				<link>http://localhost:1313/tags/projects/</link>
+				<pubDate>Mon, 08 Jan 2024 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/projects/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Programming</title>
+				<link>http://localhost:1313/tags/programming/</link>
+				<pubDate>Tue, 05 Dec 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/programming/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Rust</title>
+				<link>http://localhost:1313/tags/rust/</link>
+				<pubDate>Mon, 03 Jul 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/rust/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Aoc22</title>
+				<link>http://localhost:1313/tags/aoc22/</link>
+				<pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/aoc22/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Game</title>
+				<link>http://localhost:1313/tags/game/</link>
+				<pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/game/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Feed</title>
+				<link>http://localhost:1313/tags/feed/</link>
+				<pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/feed/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Robots</title>
+				<link>http://localhost:1313/tags/robots/</link>
+				<pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/robots/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Meta</title>
+				<link>http://localhost:1313/tags/meta/</link>
+				<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/meta/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Site</title>
+				<link>http://localhost:1313/tags/site/</link>
+				<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/site/</guid>
+				<description></description>
+			</item>
+	</channel>
+</rss>

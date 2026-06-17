@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Flight Computer on mike&#39;s website</title>
+		<link>http://localhost:1313/tags/flight-computer/</link>
+		<description>Recent content in Flight Computer on mike&#39;s website</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 01 Feb 2024 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/flight-computer/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Building a Flight Computer from Scratch</title>
+				<link>http://localhost:1313/posts/fc/intro/</link>
+				<pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/fc/intro/</guid>
+				<description>&lt;p&gt;This is the first post, hopefully in a series, about building a flight computer from scratch with embedded Rust. When I say from scratch, I really mean it: I&amp;rsquo;m designing the hardware, the software, the airframe, and the design requirements entirely from scratch.&lt;/p&gt;&#xA;&lt;p&gt;I have made some progress which is summarized later in this article.&lt;/p&gt;&#xA;&lt;h3 id=&#34;quick-bullets&#34;&gt;Quick bullets:&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Hardware&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;custom PCB&lt;/li&gt;&#xA;&lt;li&gt;sensors: gyro, compass, pressure sensor&lt;/li&gt;&#xA;&lt;li&gt;mcu: STM32F401 (64K of SRAM)&lt;/li&gt;&#xA;&lt;li&gt;radio: FrSky transmitter and 915MHz for telemetry&lt;/li&gt;&#xA;&lt;li&gt;USB 2.0 and UART breakouts&lt;/li&gt;&#xA;&lt;li&gt;option for GPS &amp;amp; differential pressure sensor&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Airframe (still TBD):&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="description" content="
+Requirements
+I wanted to implement a 2-D path planner for a mobile robot. I really like testing things in software, because it&rsquo;s cheap. So I want to simulate 2D space.My robot sees the world as sets of connected points. We are given a bunch of lists of points. If the points in a list are &ldquo;oriented&rdquo; clockwise, that set defines an &ldquo;outer boundary&rdquo;. If that set of points is &ldquo;oriented&rdquo; counter-clockwise, it defines an &ldquo;inner boundary,&rdquo; a.k.a. an obstacle."> 
+
+  <title>
+    
+    random polygons
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  <link rel="stylesheet" href='http://localhost:1313/css/main.css' />
+  
+
+
+</head><body a="auto"><header>
+  
+
+  <h1>mike&#39;s website</h1><p>writing, mostly about technology</p></header><main class="page-content" aria-label="Content">
+<a href="/">&lt;&lt;&lt;</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2021-07-15 00:00:00 &#43;0000 UTC">
+            Jul &#39;21
+        </time>
+    </p>
+
+    <h1>random polygons</h1>
+
+    
+
+
+    <script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<h2 id="requirements">Requirements</h2>
+<p>I wanted to implement a 2-D path planner for a mobile robot. I really like testing things in software, because it&rsquo;s cheap. So I want to simulate 2D space.My robot sees the world as sets of connected points. We are given a bunch of lists of points. If the points in a list are &ldquo;oriented&rdquo; clockwise, that set defines an &ldquo;outer boundary&rdquo;. If that set of points is &ldquo;oriented&rdquo; counter-clockwise, it defines an &ldquo;inner boundary,&rdquo; a.k.a. an obstacle.</p>
+<p>Our goal is to design an algorithm that will generate random such sets of points, in a way that corresponds to an environment which will challenge a robot path planner. So this is what we mean by &ldquo;Generating Random Polygons&rdquo; This is a surprisingly tricky problem. We have a couple of rough goals:</p>
+<ul>
+<li>topological constraints &ndash; each generated region has to actually be able to exist in the real world as a region. No zero-width spaces, or spaces that meet only at a single point.</li>
+<li>variability by parameterization</li>
+<li>&ldquo;interestingness&rdquo;</li>
+</ul>
+<p><img src="/img/2021-path-planner/shape_heur.jpg" alt="Good and Bad shapes"></p>
+<h3 id="tolopological-similarity">Tolopological Similarity</h3>
+<p>We are looking only at worlds with a specific structure. In our robot&rsquo;s environment there is a single <sup>††</sup> closed boundary (i.e. no disjoint boundaries) with a single layer of holes. This means that our world must, at the very least, be a <em><a href="https://en.wikipedia.org/wiki/Planar_graph">planar graph</a></em>, with no <em><a href="https://en.wikipedia.org/wiki/Bridge_(graph_theory)">bridges</a></em>. Additionally, the world we create is <em><a href="https://en.wikipedia.org/wiki/Outerplanar_graph">outerplanar</a></em>: each input point represents an un-crossable boundary, and therefore neighbors an un-crossable outer face. We also know that the inner and outer boundaries are discrete; therefore, all of their vertices have a <em><a href="https://en.wikipedia.org/wiki/Degree_(graph_theory)">degree</a></em> exactly equal to 2. This makes intuitive sense, as the world given to us is given as an outer boundary, which is an ordered list of boundary points; and each obstacle as a list of ordered boundary points.</p>
+<p>So, actually, we have a lot of topological constraints on the world that we&rsquo;re to generate.</p>
+<h3 id="variability">Variability</h3>
+<p>We also want to be able to tweak the worlds we generate to our liking. Our algorithm must be parameteriz-able. We focus on a couple of parameters:</p>
+<ul>
+<li>How non-convex our world is (it&rsquo;s &ldquo;jaggedness&rdquo;)</li>
+<li>How complex our world is (i.e. how many boundary points there are)</li>
+<li>How many obstacles are contained in our world</li>
+</ul>
+<h3 id="interestingness">Interestingness</h3>
+<p>We want to create worlds that are &ldquo;interesting&rdquo; in the same way that real-world bounded spaces are interesting. This is a surprisingly challenging task.</p>
+<p>To see what I mean by interestingness, consider the following simple method of generating non-convex polygons. We build set of points in radial coordinates \( [r, \theta] \) . For each point, take a random value between \( (0, 2 \pi)\)  and add it to \( \theta\) . Set \( r\)  to be a random value in some interval \( (R_{\text{inner}},R_{\text{outer}})\) . The list of points is wrapped around a circle and forms a polygon that satisfies all of our constraints above:</p>
+<p><img src="/img/2021-path-planner/n=10.png" alt="n=10"></p>
+<p>Here, we have 10 outer points; the polygon looks a little bit too simple. Let&rsquo;s add a few more points, maybe that will make an interesting enough polygon?</p>
+<p><img src="/img/2021-path-planner/n=20.png" alt="n=20"></p>
+<p>That looks pretty good! I think we might be off to a good start. What if we try driving our interestingness parameter higher?</p>
+<p><img src="/img/2021-path-planner/n=80.png" alt="n=80"></p>
+<p>Uh oh. That looks&hellip; not interesting. It should be clear now that varying just these two parameters, \(r, \theta\), will only make our polygon more or less spiky. It&rsquo;ll always be a spikeball settled on some point in our world. This isn&rsquo;t very realistic at all &ndash; we&rsquo;re going to be navigating some obstacles in the real world. Is there any top-down map that has a shape like this on it?</p>
+<p>So, interestingness isn&rsquo;t <em>just</em> number of points, or a measure of frequency. It&rsquo;s more closely related to the actual structure. Let&rsquo;s make our generator more elaborate.</p>
+<h2 id="delaunay-triangulation">Delaunay Triangulation</h2>
+<p>There is this thing called <a href="https://en.wikipedia.org/wiki/Delaunay_triangulation">Delaunay Triangulation</a>. I won&rsquo;t belabor it here, but basically the Delaunay Triangulation is a dual of the <a href="https://en.wikipedia.org/wiki/Voronoi_diagram">Voronoi Diagram</a> of a set of points P, which looks sort of like this <a href="https://mathematica.stackexchange.com/questions/3963/animating-a-voronoi-diagram">diagram I stole</a> from StackOverflow<sup>†</sup>:</p>
+<p><img src="/2021-img/path-planner/voronoi.gif" alt="Voronoi"></p>
+<p>If you draw circles outward from each of the points, drawing a line where the two circles meet, when the space between all points is filled, you will have a Voronoi Graph. The Delaunay Triangulation is the dual of the graph that is formed. I don&rsquo;t exactly understand how these things are done under the hood, but fortunately <code>scipy</code> has a module <code>spatial</code> that can do Delaunay triangulations. With this, we can start the polygon.</p>
+<p>First, we draw a bunch of points. Perhaps we can avoid our spikeball fate by making a couple of separate clusters of points, each centered on a region.</p>
+<p><img src="/2021-img/path-planner/1_2dpoints_dist.png" alt="Points"></p>
+<p>For this distribution, I used a <a href="https://en.wikipedia.org/wiki/Beta_distribution">beta distribution</a> with \(\alpha = 4\) and \(\beta = 4\); I found that this produced a pretty good set of points that were somewhat uniform (moreso than a gaussian) but not completely uniform (like a uniform distribution). This way, we avoid creating a squarelike cluster of points, as would be the case with a uniform distribution in cartesian space, but we don&rsquo;t get a tight cluster in near the center of the distribution, as we would with a gaussian.</p>
+<p>Still, we want the points to be kinda far away from one another, so that the edges of our polygon aren&rsquo;t too short. So we remove some points that are closer together:</p>
+<p><img src="/2021-img/path-planner/2_remove_close.png" alt="Points with close ones removed"></p>
+<p>This is kind of inefficient, because we have to make pairwise comparisons between all points in the set (so this step is \(O(n^2) \) for \(n\) points)</p>
+<p>Now, we can get the Delaunay Triangulation of our points:
+<img src="/2021-img/path-planner/3_dt.png" alt="Delaunay Triangulation"></p>
+<p>But we can see a problem. Although this shape roughly approximates our distribution of points, it is convex! Therefore, it will definitely be too easy for our path planner: we can just sweep the entire thing without even splitting it up into subcells.</p>
+<p>In fact, this convexity is a property of all Delaunay Triangulations, so this is exactly as we expect. In order to make it non-convex, our algorithm works approximately like this:</p>
+<pre tabindex="0"><code>interior, exterior = interior_exterior(dt)
+
+for h in n_holes:
+   remove random polygon from interior
+   update interior
+
+while exist(exterior) and n &lt; n_removals:
+   sort exterior by aspect ratio
+   remove sliveriest triangle from dt
+   update exterior
+</code></pre><p>Basically, we remove triangles from dt until we get a nice non-convex polygon. But we can&rsquo;t just remove any old triangle. The triangles we remove must be okay to remove. If we remove the wrong triangle, we could split our shape into two shapes that only share a single node, which would violate our requirements. Consider triangles T1 and T2 in the following figure.</p>
+<p><img src="/img/path-planner/tri_to_remove.jpg" alt="Degenerate Case"></p>
+<p>How can we distinguish between T1 and T2? We look at their neighbors and vertices. Remember that the delaunay triangulation is a dual of the voronoi graph, so the delaunay triangulation (DT) has information about not just the connected nodes, but also the connectivity of the triangles &ndash; in fact, the graph that represents connectivity between triangles is none other than the voronoi graph! To decide whether a tri belongs to <code>exterior</code>, we find its neighboring tris in the voronoi graph. Triangles on the exterior have degree 1 or 2 on the voronoi graph, meaning that they have either 1 or 2 neighboring tris &ndash; not 3. We also have some information about the vertices of the DT. Because every shape is a triangle, there is only a single edge opposite of each vertice, which is shared by only one triangle.</p>
+<p>So the voronoi graph contains 2 bits of information, actually: the neighboring triangle, and also the vertice on DT that is opposite that neighbor. From here, we can categorize &ldquo;critical&rdquo; vertices. Critical vertices:</p>
+<ol>
+<li>
+<p>Are in one or more outside triangles (degree &lt; 3 nodes on the voronoi graph)</p>
+</li>
+<li>
+<p>Are, themselves, vertices which are included in the outer edges of DT.</p>
+</li>
+</ol>
+<p>By this criteria, we can categorize triangles T1 and T2 now. They each have degree 2 on the voronoi graph &ndash; because one of their vertices is opposite empty space. We evaluate that vertex and see that for T1, it does not belong to the critical vertices; it violates the second condition, because it is not included in the outer edge of the polygon.</p>
+<p>The removal of T2, on the other hand, results in a degenerate shape. This is because the vertex opposite empty space (circled) does satisfy both conditions 1 and 2. For that reason, it is &ldquo;unsafe&rdquo; to remove.</p>
+<p>Unfortunately, all of this checking has to be done every single time we remove a triangle from the figure, because removing a triangle changes that set of critical points. The point which was safe for T2 before belongs to the critical set after T2 is removed. All of this recalculation makes the algorithm extremely slow for large amounts of points. I didn&rsquo;t spend a lot of time optimizing this step, though, so I&rsquo;m sure we can improve on speed with a more differential approach.</p>
+<p>Luckily, it doesn&rsquo;t take very many points to create a suitably complex shape. Here is the same shape after the triangulation is complete:</p>
+<p><img src="/img/path-planner/4_after_removals.png" alt="Delaunay, with removals"></p>
+<p>If you look carefully, you may notice that every point on this DT is part of the critical point set we discussed earlier. This is because we set the polygon generation algorithm to be as thorough as possible. The algorithm stops clipping triangles either when <code>n_removals</code> is exceeded, or when there are no viable triangles to remove anymore. So if we set <code>n_removals</code> very high, the algorithm will terminate with the most complex shape.</p>
+<p>The algorithm attempts to remove the most &ldquo;slivery&rdquo; triangles first (notice, that very thin tri on the very top-right was removed in the clipping process). Depending on the point distribution, some narrow points may still remain. But it looks pretty good! We&rsquo;ve satisfied our conditions: a unitary, enclosed region, with any number of holes we want, which we can customize to our liking.</p>
+<h2 id="getting-boundaries">Getting Boundaries</h2>
+<p>Okay, so now we have this shape. How can we get the boundaries of the obstacle and the outer shape?</p>
+<p>Remember those outer points? If a node of the voronoi graph has degree 2 or 1, we know that it is on the outer boundary (interior tris have tris on all three sides, hence degree 3). We further can identify which vertices on those tris lie outside. Thus, we can enumerate all outer edges of the polygon. With this collection of edges, we can perform a depth-first search to obtain the boundaries in their proper order.</p>
+<p>There&rsquo;s another bit of information we can extract. There is some minimal vertex in our shape. Therefore, we can sort all of the points by their x (or y) values, find that minimum vertex. The collection of edges to which that vertex belongs is the outer edge, and the other collections of edges are necessarily interior holes.</p>
+<p>With our depth-first search of edges, we have almost completely described the structure of the polygon. The final touch is to orient each collection. We orient the outer boundary clockwise. In order to do this, we exploit a property of closed polygons. The algorithm proceeds like so:</p>
+<p>Orientation Algorithm:</p>
+<pre tabindex="0"><code>orientation = 0
+for v in vertices:
+   orientation += cross( v_prev, v, v_next )
+</code></pre><p>Here, we introduce the &ldquo;orientation&rdquo; of a 2-d shape. If the sum of the interior angles of the shape is positive, the shape is oriented &ldquo;clockwise;&rdquo; if negative, then the shape is oriented &ldquo;counterclockwise&rdquo;. There&rsquo;s a famous identity of vectors in 3-d space:</p>
+<p>\[a \times b = |a| |b| \sin{(\theta)}\]</p>
+<p>That the sign of the cross product of two vectors \(a\) and \(b\) tells us the angle between them.</p>
+<p><img src="/img/path-planner/orient.jpg" alt="cross product orientation"></p>
+<p>So, we can go through the list of edges, compute the sum of their cross products, and if that sum is positive, the boundary is oriented clockwise; if it is negative, the boundary is oriented clockwise.</p>
+<p>From there, we can orient the boundary properly: if it contains that x-minimum point, it&rsquo;s the outer boundary, and so we orient it clockwise; if it doesn&rsquo;t contain that point, it&rsquo;s an obstacle, so we orient it counter clockwise.</p>
+<p>Now, we have our shape. Its boundaries are composed of a list-of-lists of points, the orientation of which tells us whether they are outer or inner boundaries. It is &ldquo;interesting&rdquo; in a way that we can parameterize to our liking: more points means a more complex shape, more removals means a more divoted shape, and the distribution of points gives us a general idea of the overall structure of the boundary. We made sure that it wasn&rsquo;t possible for any &ldquo;degenerate&rdquo; shapes to be generated. And our shapes can be as variable as any random distribution of points.</p>
+<p>There is one more step to this process. Rather than working with lists of points, we work with an easier data-structure that lets us encode the information we have found about edges and vertices. Under the hood, it&rsquo;s a <a href="https://en.wikipedia.org/wiki/Associative_array">map</a>; in python-land, it&rsquo;s a <a href="https://networkx.org/"><code>networkx</code></a> graph. Each vertex of our newly-formed polygon gets an index, which identifies it as a unique node on the graph. Then, we store its actual location in an array as a value in the map. We can add any additional information about the point (like its inner/outer status, GPS coordinate, etc.) as a value.</p>
+<p>Our shape, then, takes its final form:</p>
+<p><img src="/img/path-planner/5_polygon_graph.png" alt="polygon graph"></p>
+<p>Looking good! This is the type of environment that might be challenging to plan through for our mobile robot. We can generate 10,000 of these, test them in software, and evaluate their performance &ndash; without needing an expensive lab!</p>
+<hr>
+<p>† Code from StackOverflow answers is MIT, right&hellip;?</p>
+<p>†† More accurate to say that we only care about a single enclosed area, since our planner won&rsquo;t be able to generate paths between disjoint areas</p>
+
+</article>
+
+    </main>
+</body></html>

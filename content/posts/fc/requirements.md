@@ -5,7 +5,6 @@ tags: ["flight computer"]
 draft: true
 author: Mike Sutherland
 math: false
-series: "ollyfc"
 ---
 
 I am building a flight computer (for an RC plane, *not* a real plane!) from scratch! This is the first post in a series of posts where I am going to walk through, in as much detail as I possibly can, how to do this.

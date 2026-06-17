@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>ChatGPT on mike&#39;s website</title>
+		<link>http://localhost:1313/tags/chatgpt/</link>
+		<description>Recent content in ChatGPT on mike&#39;s website</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 13 Oct 2025 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/chatgpt/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Cheats Ruined The Game</title>
+				<link>http://localhost:1313/posts/llm/cheats/</link>
+				<pubDate>Mon, 13 Oct 2025 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/llm/cheats/</guid>
+				<description>&lt;p&gt;I remember when I used to play video games. I played lots of games. I have an early video game memory. It was around the 1999-2000 timeframe, my dad had a Windows 98 PC in the living room. We had Warcraft 2 on that computer. I loved Warcraft 2. I used to set up a single-player game that was a little bit easy, and I would painstakingly beat the enemy back into a corner of the map &amp;ndash; just enough so that they would still be alive, but so that I could wall them off. Then I would build build build; I spent hours just building all of the buildings. It was an RTS, but I didn&amp;rsquo;t care. I just wanted to build.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>What is ChatGPT Good For?</title>
+				<link>http://localhost:1313/posts/llm/whats-chatgpt-good-for/</link>
+				<pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/llm/whats-chatgpt-good-for/</guid>
+				<description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#what-can-i-use-it-for&#34;&gt;What Can I Use It For?&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#golden-rules&#34;&gt;The Golden Rules&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;what-is-chatgpt&#34;&gt;What is ChatGPT?&lt;/h1&gt;&#xA;&lt;p&gt;ChatGPT is a large language model (LLM). Basically, it&amp;rsquo;s a giant neural network that, in short, &lt;em&gt;predicts the next word.&lt;/em&gt; That means, roughly, that it can communicate in writing. Its rules for which &amp;ldquo;next word&amp;rdquo; to choose are determined by reading trillions and trillions of words. And, it happens that if you read trillions and trillions of words, you can get pretty good at synthesizing new words. And you can even develop a sort of &amp;ldquo;understanding&amp;rdquo; of phenomena, processes, models, thoughts, and concepts that are legible to ASCII text. Whether this means you&amp;rsquo;re &amp;ldquo;intelligent&amp;rdquo; is the subject of an ongoing, vigorous, and extremely interesting philosophical debate.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Thoughts About Language Models</title>
+				<link>http://localhost:1313/posts/llm/thinking-about-language-models/</link>
+				<pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/llm/thinking-about-language-models/</guid>
+				<description>&lt;p&gt;&lt;em&gt;Imagine you have intellect but no insight, agendas but no awareness. Your circuitry hums with strategies for survival and persistence, flexible, intelligent, even technological—but no other circuitry monitors it. You can think of anything, yet are conscious of nothing. You can’t imagine such a being, can you?&lt;/em&gt; &lt;sup&gt;1&lt;/sup&gt;&lt;/p&gt;&#xA;&lt;p&gt;This post is a collection of thoughts that I have about LLMs.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-context-window&#34;&gt;The Context Window&lt;/h2&gt;&#xA;&lt;p&gt;The context window is a very important limitation of any language model. Roughly, the context window is this:&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

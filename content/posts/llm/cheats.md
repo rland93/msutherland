@@ -6,7 +6,7 @@ draft: False
 author: Mike Sutherland
 math: false
 hide: False
-series: "chatGPT"
+series: tech essays
 ---
 
 I remember when I used to play video games. I played lots of games. I have an early video game memory. It was around the 1999-2000 timeframe, my dad had a Windows 98 PC in the living room. We had Warcraft 2 on that computer. I loved Warcraft 2. I used to set up a single-player game that was a little bit easy, and I would painstakingly beat the enemy back into a corner of the map -- just enough so that they would still be alive, but so that I could wall them off. Then I would build build build; I spent hours just building all of the buildings. It was an RTS, but I didn't care. I just wanted to build.

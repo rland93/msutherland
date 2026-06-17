@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Rants on mike&#39;s website</title>
+		<link>http://localhost:1313/tags/rants/</link>
+		<description>Recent content in Rants on mike&#39;s website</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 27 May 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/rants/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Can we have the day off?</title>
+				<link>http://localhost:1313/posts/day-off/</link>
+				<pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/day-off/</guid>
+				<description>&lt;p&gt;So, apparently we are at the cusp of the entire world&amp;rsquo;s white collar workforce&#xA;(and, by extension, much of the US workforce) undergoing a revolution in&#xA;productivity. AI is the technology that is going to revolutionize the way we&#xA;work, the way we interact with the world, the way we learn, the way we&#xA;socialize, and all of this. This sounds great. Really, it does. Everything&#xA;getting faster and easier would be an extraordinary boon to all of our lives.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

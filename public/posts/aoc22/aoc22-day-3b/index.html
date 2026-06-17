@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="description" content="Problem Statement
+This is a similar problem to 3A.
+Now, rather than compare between slices for each line, we are comparing between lines. We are comparing groupings of 3 lines. What we aim to do is find the score of the common item for each 3 lines and add it to the accumulator, just like in the previous problem."> 
+
+  <title>
+    
+    AoC &#39;23 3B
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  <link rel="stylesheet" href='http://localhost:1313/css/main.css' />
+  
+
+
+</head><body a="auto"><header>
+  
+
+  <h1>mike&#39;s website</h1><p>writing, mostly about technology</p></header><main class="page-content" aria-label="Content">
+<a href="/">&lt;&lt;&lt;</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2023-02-07 00:00:00 &#43;0000 UTC">
+            Feb &#39;23
+        </time>
+    </p>
+
+    <h1>AoC &#39;23 3B</h1>
+
+    
+
+
+    <h2 id="problem-statement">Problem Statement</h2>
+<p>This is a similar problem to 3A.</p>
+<p>Now, rather than compare between slices for each line, we are comparing between lines. We are comparing groupings of 3 lines. What we aim to do is find the score of the common item for each 3 lines and add it to the accumulator, just like in the previous problem.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>vJrwpWtwJgWrhcsFMMfFFhFp
+</span></span><span style="display:flex;"><span>jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+</span></span><span style="display:flex;"><span>PmmdzqPrVvPwwTWBwg
+</span></span><span style="display:flex;"><span>wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+</span></span><span style="display:flex;"><span>ttgJtRGJQctTZtZT
+</span></span><span style="display:flex;"><span>CrZsJsPPZsGzwwsLwLmpwMDw
+</span></span></code></pre></div><p>For the above input, we have two groupings of 3, for a total of 6 lines. The top 3 lines share the letter &lsquo;r&rsquo;; the bottom group shares &lsquo;Z&rsquo;. Therefore, the sum is score(r) + score(Z), which is 18 + 52.</p>
+<p>Given many of these groups, we are to find their total score.</p>
+<h2 id="approach">Approach</h2>
+<p>For this, we are again going to turn to <code>HashSet</code>. But this time, we&rsquo;re comparing 3 separate HashTypes to get the common elements between them. This makes it a little bit more difficult, because most set membershi methods for HashSet can compare only one set to one other set. Here, we need to compare 3 sets (A similar problem for groups of \(k\) would need to do membership checks on \(k\) HashSets).</p>
+<p>So let&rsquo;s say we have a group of lines A, B, C that has a bunch of stuff in it. Some things are shared between members, but only one thing, Q &ndash; a set with only one element &ndash; is shared by all three members. That is what we are looking for, the value of that single element in Q.</p>
+<img class="pct40 centered" src="/img/aoc_rs/common_3.svg">
+<p>HashSet can only look at intersections between two elements at once. So our algorithm will do something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">part_two</span>(input):
+</span></span><span style="display:flex;"><span>    groups <span style="color:#f92672">=</span> chunk(input, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    accumulator <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> linegroup <span style="color:#f92672">in</span> groups:
+</span></span><span style="display:flex;"><span>        A, B, C <span style="color:#f92672">=</span> linegroup
+</span></span><span style="display:flex;"><span>        AB <span style="color:#f92672">=</span> set(A)<span style="color:#f92672">.</span>intersect(set(B))
+</span></span><span style="display:flex;"><span>        element <span style="color:#f92672">=</span> set(C)<span style="color:#f92672">.</span>intersect(AB)<span style="color:#f92672">.</span>next()
+</span></span><span style="display:flex;"><span>        accumulator <span style="color:#f92672">+=</span> score(element)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> accumulator
+</span></span></code></pre></div><p>We&rsquo;ll assume that chunk will iterate 3 elements at a time (e.g. linegroup is a tuple of 3 lines that we unpack into A, B, and C).</p>
+<p>Now, this algorithm works for three items, but I would like to generalize it to \(k\) elements. We can alter the algorithm slightly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">part_two</span>(input):
+</span></span><span style="display:flex;"><span>    groups <span style="color:#f92672">=</span> chunk(input, k)
+</span></span><span style="display:flex;"><span>    accumulator <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> linegroup <span style="color:#f92672">in</span> groups:
+</span></span><span style="display:flex;"><span>        Q <span style="color:#f92672">=</span> set()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i, line <span style="color:#f92672">in</span> enumerate(linegroup):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>                Q <span style="color:#f92672">=</span> set(line)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                Q <span style="color:#f92672">=</span> Q<span style="color:#f92672">.</span>intersect(set(line))
+</span></span><span style="display:flex;"><span>        element <span style="color:#f92672">=</span> Q<span style="color:#f92672">.</span>next()
+</span></span><span style="display:flex;"><span>        accumulator <span style="color:#f92672">+=</span> score(element)
+</span></span></code></pre></div><p>With this algorithm, we exploit the fact that the result of any intersection of a set A and B will always produce a subset of <em>both</em> A and B. Thus, every time we do the step <code>Q.intersect(set(line))</code>, we know that intersect will reduce the size of Q, because we cannot add elements by intersection; the largest subset of a set is simply the set itself! So <code>intersect</code> cannot ever give us a bigger set.</p>
+<p>A smarter version of this algorithm may finish early, if we check the length of Q at line 11 and bail early if len==1.</p>
+<p>Now, let&rsquo;s look at time complexity.</p>
+<p>All Chunk does is grab parts of the list at a time, so chunking through an array is the same as iterating through an array, so the runtime is \(O(n)\). Transforming each line into a set will take \(O(m)\) for line length \(m\). But for us, our line is going to be very short, so we can assume making a set our of each line is \(O(1)\).</p>
+<p>Now, <code>intersect</code> is \(O(n)\) where \(n\) is the smaller of the two sets (this makes sense; the largest possible intersection of two sets is just the smaller set). Again: \(O(1)\), we&rsquo;re dealing with very small sets here.</p>
+<p>These are the two important operations of our time-complexity analysis, so the time complexity in total is \(O(n)\) for \(n\) lines.</p>
+<h2 id="solution">Solution</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">part_two</span>(input: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; Option<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">u32</span><span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// lines -&gt; byte arrays
+</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> barr: Vec<span style="color:#f92672">&lt;&amp;</span>[<span style="color:#66d9ef">u8</span>]<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> input.lines()
+</span></span><span style="display:flex;"><span>        .map(
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">|</span>x<span style="color:#f92672">|</span> x.as_bytes()
+</span></span><span style="display:flex;"><span>        ).collect();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// sum we will accumulate over
+</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> sigma: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// chunk size 3 -&gt; groups of 3
+</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> group <span style="color:#66d9ef">in</span> barr.chunks(<span style="color:#ae81ff">3</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> group_common: <span style="color:#a6e22e">HashSet</span><span style="color:#f92672">&lt;&amp;</span><span style="color:#66d9ef">u8</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> HashSet::new();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (i, member) <span style="color:#66d9ef">in</span> group.iter().enumerate() {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> member_items: <span style="color:#a6e22e">HashSet</span><span style="color:#f92672">&lt;&amp;</span><span style="color:#66d9ef">u8</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> HashSet::from_iter(<span style="color:#f92672">*</span>member);
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// we&#39;ll compare other members to the first member. So we put him
+</span></span></span><span style="display:flex;"><span>            <span style="color:#75715e">// into group_common
+</span></span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+</span></span><span style="display:flex;"><span>                group_common <span style="color:#f92672">=</span> member_items;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// subsequent members, we&#39;ll do the actual compare
+</span></span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                group_common.retain(<span style="color:#f92672">|</span>x<span style="color:#f92672">|</span> member_items.contains(<span style="color:#f92672">*</span>x));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// now we need to actually score and accumulate
+</span></span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> group_common_iter <span style="color:#f92672">=</span> group_common.iter();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">match</span> group_common_iter.next() {
+</span></span><span style="display:flex;"><span>            Some(x) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                sigma <span style="color:#f92672">+=</span> charbyte_to_score(<span style="color:#f92672">*</span>x);
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            None <span style="color:#f92672">=&gt;</span> {<span style="color:#a6e22e">panic!</span>(<span style="color:#e6db74">&#34;Group had no elements in common!&#34;</span>);}
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// finally, let&#39;s just make sure we don&#39;t have any common sets
+</span></span></span><span style="display:flex;"><span>        <span style="color:#75715e">// with length &gt; 1.
+</span></span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> group_common_iter.next().is_some() {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">panic!</span>(<span style="color:#e6db74">&#34;Group has more than one element in common!&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Some(sigma);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+</article>
+
+    </main>
+</body></html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Robots on mike&#39;s website</title>
+		<link>http://localhost:1313/tags/robots/</link>
+		<description>Recent content in Robots on mike&#39;s website</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 15 Jul 2021 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/robots/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>random polygons</title>
+				<link>http://localhost:1313/posts/programming/polygons/</link>
+				<pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/programming/polygons/</guid>
+				<description>&lt;script type=&#34;text/javascript&#34; id=&#34;MathJax-script&#34; async&#xA;  src=&#34;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&#34;&gt;&#xA;&lt;/script&gt;&#xA;&lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;&#xA;&lt;p&gt;I wanted to implement a 2-D path planner for a mobile robot. I really like testing things in software, because it&amp;rsquo;s cheap. So I want to simulate 2D space.My robot sees the world as sets of connected points. We are given a bunch of lists of points. If the points in a list are &amp;ldquo;oriented&amp;rdquo; clockwise, that set defines an &amp;ldquo;outer boundary&amp;rdquo;. If that set of points is &amp;ldquo;oriented&amp;rdquo; counter-clockwise, it defines an &amp;ldquo;inner boundary,&amp;rdquo; a.k.a. an obstacle.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

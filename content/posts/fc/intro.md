@@ -5,7 +5,6 @@ tags: ["flight computer"]
 draft: false
 author: Mike Sutherland
 math: false
-series: "ollyfc"
 ---
 
 This is the first post, hopefully in a series, about building a flight computer from scratch with embedded Rust. When I say from scratch, I really mean it: I'm designing the hardware, the software, the airframe, and the design requirements entirely from scratch.

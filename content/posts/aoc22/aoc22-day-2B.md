@@ -4,7 +4,7 @@ date: 2023-01-25
 tags: ["programming", "rust", "aoc22"]
 draft: False
 author: Mike Sutherland
-series: "advent of code in rust"
+series: aoc journal
 ---
 
 ## Problem Statement

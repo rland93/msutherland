@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="description" content="Problem
+This problem is similar to problem 1A. We have this big list of numbers:"> 
+
+  <title>
+    
+    AoC &#39;23 1B
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  <link rel="stylesheet" href='http://localhost:1313/css/main.css' />
+  
+
+
+</head><body a="auto"><header>
+  
+
+  <h1>mike&#39;s website</h1><p>writing, mostly about technology</p></header><main class="page-content" aria-label="Content">
+<a href="/">&lt;&lt;&lt;</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2023-01-12 00:00:00 &#43;0000 UTC">
+            Jan &#39;23
+        </time>
+    </p>
+
+    <h1>AoC &#39;23 1B</h1>
+
+    
+
+
+    <h2 id="problem">Problem</h2>
+<p>This problem is similar to problem 1A. We have this big list of numbers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2000</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5000</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7000</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8000</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10000</span>
+</span></span></code></pre></div><p>Each group is separated by the blank line. But now, instead of the sum of all the numbers in the <em>largest</em> group, we are asked to find the sum of the largest 3 groups.</p>
+<h2 id="initial-approach">Initial Approach</h2>
+<p>This complicates our cumsum approach from part 1 (devious puzzle makers), because rather than having a single variable, we will need 3 variables if we want to keep our top 3 elves. We also need lots of comparison logic to make sure we shuffle the top 3 around as we build the list. This might be tractable for our top 3 elves, but it becomes brutal quickly for our top <em>k</em> elves</p>
+<p>My first intuition for this problem is to reach for something like <a href="https://docs.python.org/3/library/bisect.html">bisect</a> here. Rather than maintaining a single variable and considering whether the current sum is greater than it (like we did in <a href="/posts/aoc22/aoc22-day-1a/">part 1</a>, we will maintain a list of calorie sums; when we are finished summing the current set of calories, we&rsquo;ll bisect our existing list to determine where to insert the current sum before moving onto the next one.</p>
+<p>We can maintain the sort order of the list as we build it instead of re-sorting on each insert, which is expensive. Then, once we are finished building the sorted list, we can simply take the last three items (or last <em>k</em> items) to obtain the top three calorie counts.</p>
+<p>I keep saying &ldquo;<em>list</em>&rdquo; here, because I come from Pythonland where <em>list</em> means like&hellip; wait, what the heck is a <em>list</em> in Python anyway? <sub>Is this why Python is slow?</sub></p>
+<p>In order to perform all of this bisection and insertion efficiently, we will need a datastructure that will balance both. Rather than an array, I&rsquo;m reaching for a <a href="https://en.m.wikipedia.org/wiki/Binary_search_tree">binary search tree</a> for this one. This is probably not necessary (I can definitely just use some built-in sorting) but I think it will be fun, and I&rsquo;ve heard that whiteboard binary tree questions were common Google interview question 15 years ago.</p>
+<p>With Rust&rsquo;s more assiduous approach to memory management this should be a fun exercise.</p>
+<p>Our initial approach looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">topThreeElves</span>(file):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    elf_packs: new Btree
+</span></span><span style="display:flex;"><span>    current_pack: new Bnode
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> snack <span style="color:#f92672">in</span> file:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> l <span style="color:#f92672">is</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>:
+</span></span><span style="display:flex;"><span>            insert(elf_packs, current_pack)
+</span></span><span style="display:flex;"><span>            current_pack <span style="color:#f92672">=</span> new Bnode
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            current_pack<span style="color:#f92672">.</span>store(snack)
+</span></span><span style="display:flex;"><span>            current_pack<span style="color:#f92672">.</span>sum <span style="color:#f92672">+=</span> snack
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    calorie_sums <span style="color:#f92672">=</span> elf_packs<span style="color:#f92672">.</span>traverse_in_order()
+</span></span><span style="display:flex;"><span>    top_three <span style="color:#f92672">=</span> calorie_sums[<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>:]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> topThree
+</span></span></code></pre></div><p>I won&rsquo;t go through Binary Trees here &ndash; there are much better guides out here.</p>
+<p>See <a href="https://en.m.wikipedia.org/wiki/Binary_search_tree">binary search tree &ndash; insertion</a> for more details.</p>
+</article>
+
+    </main>
+</body></html>

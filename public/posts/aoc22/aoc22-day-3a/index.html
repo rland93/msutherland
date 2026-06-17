@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="description" content="Problem Statement
+We have a big list. Each item in the list is a duo of collections. Each of these collections has a single item (only one?) in common. Here&rsquo;s my example puzzle input:"> 
+
+  <title>
+    
+    AoC &#39;23 3A
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  <link rel="stylesheet" href='http://localhost:1313/css/main.css' />
+  
+
+
+</head><body a="auto"><header>
+  
+
+  <h1>mike&#39;s website</h1><p>writing, mostly about technology</p></header><main class="page-content" aria-label="Content">
+<a href="/">&lt;&lt;&lt;</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2023-02-06 00:00:00 &#43;0000 UTC">
+            Feb &#39;23
+        </time>
+    </p>
+
+    <h1>AoC &#39;23 3A</h1>
+
+    
+
+
+    <h2 id="problem-statement">Problem Statement</h2>
+<p>We have a big list. Each item in the list is a duo of collections. Each of these collections has a single item (only one?) in common. Here&rsquo;s my example puzzle input:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>vJrwpWtwJgWrhcsFMMfFFhFp
+</span></span><span style="display:flex;"><span>jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+</span></span><span style="display:flex;"><span>PmmdzqPrVvPwwTWBwg
+</span></span><span style="display:flex;"><span>wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+</span></span><span style="display:flex;"><span>ttgJtRGJQctTZtZT
+</span></span><span style="display:flex;"><span>CrZsJsPPZsGzwwsLwLmpwMDw
+</span></span></code></pre></div><p>Each line has a bunch of characters. A character is an item. Each line has an even number of these characters; the first half of the line is the first collection and the second half is the second. So this line:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>aaaBBB
+</span></span></code></pre></div><p>Has a collection with items <code>aaa</code> and a collection of items <code>BBB</code>.</p>
+<h2 id="first-sketch">First Sketch</h2>
+<p>What we are going to do is iterate through the list, split the line into its respective collections, and then somehow look at the collections to determine which item they have in common. Then, we&rsquo;ll use a lookup table &ndash; we can probably build the lookup table directly from ASCII character codes &ndash; to calculate that item&rsquo;s score.</p>
+<p>Because we are going to check for membership in collections a lot, I am reaching for some kind of hash set datastructure here. We find this in the standard library&rsquo;s <a href="https://doc.rust-lang.org/std/collections/hash_set/struct.HashSet.html">Hash Set</a>.</p>
+<p>I assume that in most languages, membership and insertion in hash maps is \( O(1)\), or maybe \( O(\log n) \) at worst.. From some digging, I find that Rust uses <a href="https://en.wikipedia.org/wiki/SipHash">Sip Hash</a>. You can really dive off the deep end when it comes to hashing, so for me, it&rsquo;s good enough to know that Sip Hash is <em>very</em> fast and fairly secure.</p>
+<p>Our algorithm is going to look something like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">part_one</span>(input):
+</span></span><span style="display:flex;"><span>    sigma <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> input:
+</span></span><span style="display:flex;"><span>        A <span style="color:#f92672">=</span> line[: length(line) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>]
+</span></span><span style="display:flex;"><span>        B <span style="color:#f92672">=</span> line[length(line) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span> :]
+</span></span><span style="display:flex;"><span>        common_member <span style="color:#f92672">=</span> ( set(A) <span style="color:#f92672">&amp;&amp;</span> set(B) )<span style="color:#f92672">.</span>next()
+</span></span><span style="display:flex;"><span>        sigma <span style="color:#f92672">+=</span> score_lookup[common_member]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> sigma
+</span></span></code></pre></div><p>Pretty straightforward. We are are going to iterate through the input, split the line into two collections, A and B, convert each of those collections into Hash Sets (in pythonland, that&rsquo;s just a <code>set</code>), and then perform AND on A and B. The resulting set has only one member, so we&rsquo;ll grab it and then do a score lookup. The sum of scores (one per line, because each line has one common element) is the total &ldquo;priority score&rdquo; that we&rsquo;re looking for.</p>
+<p>Runtime will be \( O(n \log(2m)) \) at the very worst, where \(n\) is the number of lines and \(m\) is the number of items in each collection. But really, it&rsquo;ll probably be \( O(n) \).</p>
+<h2 id="solution">Solution</h2>
+<p>We have pulled out the logic for splitting the rucksack into compartments and that for finding the common element between compartments.</p>
+<p>For finding one common element:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">score_common_in_rucksack</span>(rucksack: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; <span style="color:#66d9ef">u32</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> items <span style="color:#f92672">=</span> rucksack.as_bytes();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> rlen <span style="color:#f92672">=</span> items.len();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// even odd
+</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">match</span> rlen {
+</span></span><span style="display:flex;"><span>        _odd <span style="color:#66d9ef">if</span> rlen <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">panic!</span>(<span style="color:#e6db74">&#34;odd no. of items in rucksack!&#34;</span>);
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        even <span style="color:#66d9ef">if</span> rlen <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> half: <span style="color:#66d9ef">usize</span> <span style="color:#f92672">=</span> even <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> set_a <span style="color:#f92672">=</span> HashSet::from_iter(
+</span></span><span style="display:flex;"><span>                items[<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>half].iter()
+</span></span><span style="display:flex;"><span>            );
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> set_b: <span style="color:#a6e22e">HashSet</span><span style="color:#f92672">&lt;&amp;</span><span style="color:#66d9ef">u8</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> HashSet::from_iter(
+</span></span><span style="display:flex;"><span>                items[half<span style="color:#f92672">..</span>items.len()].iter()
+</span></span><span style="display:flex;"><span>            );
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> get_single_common(<span style="color:#f92672">&amp;</span>set_a, <span style="color:#f92672">&amp;</span>set_b);
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        _ <span style="color:#f92672">=&gt;</span> {<span style="color:#a6e22e">panic!</span>();}
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We&rsquo;re going to check the length. Odd means that somehow we have a malformed line; a rucksack always has two compartments of equal length, so must be a multiple of 2! Then, assuming we&rsquo;re even, we&rsquo;ll need to get a HashSet for each compartment. Since we don&rsquo;t care about the characters themselves, only the score, we can get the raw byte values as u8 rather than dealing with strings. Since we have an even number, the division of <code>even</code> by 2 on line 10 will always be sensible. Then, we&rsquo;re going to cut items in two pieces.</p>
+<p>But here, we aren&rsquo;t assigning values of the array <code>items</code> to <code>a</code> and <code>b</code>; just a reference to some values. <code>items</code> was the output of a <a href="https://doc.rust-lang.org/std/primitive.str.html#method.as_bytes"><code>to_bytes()</code></a> function call. So we cannot alter items. So this means that when we produce the <code>HashSet</code>s, we end up with sets of <em>references</em> to some u8&rsquo;s somewhere. My understanding is that u8 has a bunch of traits that HashSet can use for equality, comparison, etc.</p>
+<p>Once we have both sets, we just need the common element between them.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">get_single_common</span>(set_a: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">HashSet</span><span style="color:#f92672">&lt;&amp;</span><span style="color:#66d9ef">u8</span><span style="color:#f92672">&gt;</span>, set_b: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">HashSet</span><span style="color:#f92672">&lt;&amp;</span><span style="color:#66d9ef">u8</span><span style="color:#f92672">&gt;</span>) -&gt; <span style="color:#66d9ef">u32</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> in_both <span style="color:#f92672">=</span> set_a.intersection(<span style="color:#f92672">&amp;</span>set_b);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> common <span style="color:#f92672">=</span> in_both.next();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> in_both.next().is_some() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">panic!</span>(<span style="color:#e6db74">&#34;More than one common element!&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">match</span> common.copied() {
+</span></span><span style="display:flex;"><span>        Some(common) <span style="color:#f92672">=&gt;</span> charbyte_to_score(common),
+</span></span><span style="display:flex;"><span>        None <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">panic!</span>(<span style="color:#e6db74">&#34;no common element found! Check your input? </span><span style="color:#e6db74">{:?}</span><span style="color:#e6db74">&#34;</span>, common)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This method exploits the lazy evaluation of <code>intersection</code> to guard against rucksacks containing more than one common element. We find the intersection of the two, then grab the first element of that intersection. Then we can just check if there&rsquo;s anything else in the intersection; if so, that means that the rucksacks have more than one element in common.</p>
+<p>This was actually a pretty cool way of doing that. I tried at first to find the <code>len()</code> of <code>in_both</code> &ndash; but it turns out intersection produces a lazy iterator. This was just a little coincidence that happened to save me some clock cycles this time around. I wonder what I would have done if I needed to do something with that intersection? Gone through the whole iterator?</p>
+<p>Now; calling <code>next()</code> produces a <em>reference</em> to the value inside of <code>in_both.</code> This makes sense; the result of calling <code>.intersection()</code> is an <em>iterable</em> that produces <em>references</em> to the objects inside of sets A and B. If these objects are large we want to avoid moving them around. In this case, they are tiny tiny u8s.</p>
+<p>We&rsquo;ll explicitly tell rust to copy <code>common</code>, and then we guard again against an empty common which occurs if the two sets share no elements. I&rsquo;m not too happy with the readability of this function; I think it might be a lot clearer to somehow guard against the <code>none</code>-ness of the first element in addition to the <code>some</code>ness of the element after the first &ndash; all in one fell swoop. This would improve readability, but it&rsquo;s late and I want to finish.</p>
+<p>Now that we have the one common element, we again need to dereference it before doing arithmetic on the true byte values. Why? Because those first <code>set_a</code> and <code>set_b</code> were produced from <code>HashSet::from_iter()</code> &ndash; the thing we passed into that iterator was a <code>&amp;[u8]</code>. AKA a reference to some array of u8 in memory. We&rsquo;ve been doing <em>all of this</em> with pointers! This wouldn&rsquo;t be impossible in C, but it certainly would have been very difficult to keep the long chain of ownership top of mind.</p>
+<p>But now that we&rsquo;ve safely guarded our output, we can unpack these and do the final arithmetic on them. In this case, the score table is easy; we just distinguish between the lowercase <code>abcde...</code> and the uppercase <code>ABCDE...</code>, and apply the <a href="https://en.wikipedia.org/wiki/ASCII#Control_code_chart">appropriate offsets</a> to get our points:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">charbyte_to_score</span>(x: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">u8</span>) -&gt; <span style="color:#66d9ef">u32</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">*</span>x <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">65</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">*</span>x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">91</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">u32</span>::from(<span style="color:#f92672">*</span>x <span style="color:#f92672">-</span> <span style="color:#ae81ff">38</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">*</span>x <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">97</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">*</span>x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">123</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">u32</span>::from(<span style="color:#f92672">*</span>x <span style="color:#f92672">-</span> <span style="color:#ae81ff">96</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">panic!</span>(<span style="color:#e6db74">&#34;bad char. maybe a non-alphanumeric in input?&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>For arbitrary offsets, we could use a lookup table.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">part_one</span>(input: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; Option<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">u32</span><span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> res:<span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> input
+</span></span><span style="display:flex;"><span>        .lines()
+</span></span><span style="display:flex;"><span>        .map(<span style="color:#f92672">|</span>rucksack<span style="color:#f92672">|</span> score_common_in_rucksack(rucksack)).sum();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Some(res);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>So this is how we do part one. Although Python has a variation of <code>map()</code>, I haven&rsquo;t used it much, and I&rsquo;m actually finding it pretty ergonomic.</p>
+</article>
+
+    </main>
+</body></html>

@@ -4,7 +4,7 @@ date: 2023-12-01
 tags: ["programming", "rust", "aoc23"]
 draft: True
 author: Mike Sutherland
-series: "advent of code in rust 23"
+series: aoc journal
 ---
 
 I am doing advent of code in Rust. Again.

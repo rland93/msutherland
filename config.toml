@@ -1,5 +1,5 @@
 baseURL = 'http://example.org/'
-languageCode = 'en-us'
+Language.Locale = 'en-us'
 title = "mike's website"
 theme = 'nostyle'
 

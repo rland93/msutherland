@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Software on mike&#39;s website</title>
+		<link>http://localhost:1313/tags/software/</link>
+		<description>Recent content in Software on mike&#39;s website</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 14 Feb 2025 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/software/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Decline in Software?</title>
+				<link>http://localhost:1313/posts/programming/b/</link>
+				<pubDate>Fri, 14 Feb 2025 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/programming/b/</guid>
+				<description>&lt;p&gt;I wrote this up as a youtube comment and then figured I&amp;rsquo;d post it here.&lt;/p&gt;&#xA;&lt;p&gt;talk:&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=ZSRHeXYDLko&#34;&gt;https://www.youtube.com/watch?v=ZSRHeXYDLko&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;summary:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Jonathan Blow discusses the trajectory of technological advancement and decline, particularly in software, by drawing parallels from historical events such as the U.S.-Soviet space race. He highlights that significant advancements, like sending humans to the moon, can be lost over time due to the complexity of systems and a lack of knowledge transfer across generations. Blow argues that contemporary software is experiencing a decline in robustness and productivity due to increasing complexity and reliance on higher-level abstractions that obscure foundational knowledge. He stresses the importance of simplifying systems at all levels—from hardware to software—to avoid potential societal collapse reminiscent of ancient civilizations. The talk serves as a call to re-evaluate our current trajectory in software development to ensure sustainable technological progress and knowledge preservation. (from TL;DW &lt;a href=&#34;https://tldw.tube/?v=ZSRHeXYDLko&#34;&gt;https://tldw.tube/?v=ZSRHeXYDLko&lt;/a&gt;)&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

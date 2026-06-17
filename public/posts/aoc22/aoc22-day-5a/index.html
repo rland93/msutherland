@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="description" content="Problem Statement
+We are given an initial state and an ordered set of moves. The state are items in &ldquo;crates&rdquo; &ndash; [P] is a crate, for example.
+We are then asked to make the moves on the initial state; e.g. move 1 from 2 to 1 calculate the next state. We repeat this process until we reach the terminal state. When we have the terminal stat
+    [D]
+[N] [C]
+[Z] [M] [P]
+ 1   2   3
+
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2
+"> 
+
+  <title>
+    
+    AoC &#39;23 5A
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  <link rel="stylesheet" href='http://localhost:1313/css/main.css' />
+  
+
+
+</head><body a="auto"><header>
+  
+
+  <h1>mike&#39;s website</h1><p>writing, mostly about technology</p></header><main class="page-content" aria-label="Content">
+<a href="/">&lt;&lt;&lt;</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2023-03-02 00:00:00 &#43;0000 UTC">
+            Mar &#39;23
+        </time>
+    </p>
+
+    <h1>AoC &#39;23 5A</h1>
+
+    
+
+
+    <h2 id="problem-statement">Problem Statement</h2>
+<p>We are given an initial state and an ordered set of moves. The state are items in &ldquo;crates&rdquo; &ndash; <code>[P]</code> is a crate, for example.</p>
+<p>We are then asked to make the moves on the initial state; e.g. <code>move 1 from 2 to 1</code> calculate the next state. We repeat this process until we reach the terminal state. When we have the terminal stat</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>    [D]
+</span></span><span style="display:flex;"><span>[N] [C]
+</span></span><span style="display:flex;"><span>[Z] [M] [P]
+</span></span><span style="display:flex;"><span> 1   2   3
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>move 1 from 2 to 1
+</span></span><span style="display:flex;"><span>move 3 from 1 to 3
+</span></span><span style="display:flex;"><span>move 2 from 2 to 1
+</span></span><span style="display:flex;"><span>move 1 from 1 to 2
+</span></span></code></pre></div><h2 id="approach">Approach</h2>
+<p>My first thought is to do this in the obvious way, which is to explicitly calculate the full state and the transitions between the states. There are a few aspects to the problem.</p>
+<p>One of these is parsing. We need to take this plain-text representation and turn it into a state. This might be a little bit complex, because there are multiple lines, and blank areas (no crate), and the number of lines depends on the state. Finally, we have a number of stacks, probably more than the 3 in the example. Lucky for us, we have regex.</p>
+<p>Second, our datastructure. This one seems fairly easy &ndash; it&rsquo;s in the name; we are dealing with stacks, so I&rsquo;m going to use a FIFO queue. To move an item from one stack to another, we will pop the element from one and push to another. Let&rsquo;s unpack our state transition statements:</p>
+<p><code>move 1 from 2 to 1</code></p>
+<p>Let&rsquo;s re-write this a bit. Given a stack \(Q\) and a stack \(P\) we are going to make a move \(n\) times from \(Q\) to \(P\), by popping from \(Q\) and pushing to \(P\). Our state transition function looks like this then:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">move</span>(n: int, q: Stack, p: Stack):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, n):
+</span></span><span style="display:flex;"><span>        element <span style="color:#f92672">=</span> q<span style="color:#f92672">.</span>pop()
+</span></span><span style="display:flex;"><span>        p<span style="color:#f92672">.</span>push(element)
+</span></span></code></pre></div><p>With this, we can scaffold our program:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">partA</span>(input: str):
+</span></span><span style="display:flex;"><span>    stacks <span style="color:#f92672">=</span> parse_state(input)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> n, src, dst <span style="color:#f92672">in</span> parse_moves(input):
+</span></span><span style="display:flex;"><span>        move(n, <span style="color:#f92672">&amp;</span>src, <span style="color:#f92672">&amp;</span>dst)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> top_of_stacks(stacks)
+</span></span></code></pre></div><p>We have a <code>parse_state</code>, that gets the stacks from lines in the input. We have a <code>parse_moves</code> that gets the series of moves from lines in the raw input. Finally, we are asked to output only the top items on each stack after the final moves, so we have a helper <code>top_of_stacks</code> that will do that.</p>
+<h2 id="solution">Solution</h2>
+</article>
+
+    </main>
+</body></html>

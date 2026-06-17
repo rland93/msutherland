@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>mike&#39;s website</title>
+		<link>http://localhost:1313/</link>
+		<description>Recent content on mike&#39;s website</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 17 Jun 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>The Phone Self-Thing</title>
+				<link>http://localhost:1313/posts/the-phone-self-thing/</link>
+				<pubDate>Wed, 17 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/the-phone-self-thing/</guid>
+				<description>&lt;p&gt;We discover our sense of self in steps starting in early childhood. It is between 2-3 months, at some point during infancy, when we first realize that the actions of &amp;ldquo;me&amp;rdquo;, the self-thing, produce some kind of reaction in our infant caregiver.&lt;/p&gt;&#xA;&lt;p&gt;The famous test of self-discovery is the mirror test, also called the rouge test: place a child in front of a mirror, then put dirt or something on their nose. Before 18 months, the child will reach towards the mirror to wipe the dirt off; but somewhere between 18 and 24 months and thereafter, the child will reach instead towards their own nose, indicating independent recognition of the &amp;ldquo;my&amp;rdquo; in &amp;ldquo;my nose.&amp;rdquo;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Can we have the day off?</title>
+				<link>http://localhost:1313/posts/day-off/</link>
+				<pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/day-off/</guid>
+				<description>&lt;p&gt;So, apparently we are at the cusp of the entire world&amp;rsquo;s white collar workforce&#xA;(and, by extension, much of the US workforce) undergoing a revolution in&#xA;productivity. AI is the technology that is going to revolutionize the way we&#xA;work, the way we interact with the world, the way we learn, the way we&#xA;socialize, and all of this. This sounds great. Really, it does. Everything&#xA;getting faster and easier would be an extraordinary boon to all of our lives.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Cheats Ruined The Game</title>
+				<link>http://localhost:1313/posts/llm/cheats/</link>
+				<pubDate>Mon, 13 Oct 2025 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/llm/cheats/</guid>
+				<description>&lt;p&gt;I remember when I used to play video games. I played lots of games. I have an early video game memory. It was around the 1999-2000 timeframe, my dad had a Windows 98 PC in the living room. We had Warcraft 2 on that computer. I loved Warcraft 2. I used to set up a single-player game that was a little bit easy, and I would painstakingly beat the enemy back into a corner of the map &amp;ndash; just enough so that they would still be alive, but so that I could wall them off. Then I would build build build; I spent hours just building all of the buildings. It was an RTS, but I didn&amp;rsquo;t care. I just wanted to build.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Review: The Defense, Nabokov</title>
+				<link>http://localhost:1313/posts/lit/nabokov-the-defense/</link>
+				<pubDate>Wed, 19 Feb 2025 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/lit/nabokov-the-defense/</guid>
+				<description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/lit/the-defense-nabokov.jpg&#34; alt=&#34;Nabokov, The Defense&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/The_Defense&#34;&gt;The Defense&lt;/a&gt;, or, The Luzhin Defense, was Vladimir Nabokov&amp;rsquo;s third novel, published in Russian in 1930 and English in 1962. It is a novel about Luzhin (like, &amp;ldquo;illusion&amp;rdquo; &amp;ndash; the phonetic allusion is apparently even stronger in Russian), a genius chess master. The story proceeds in 3-acts. In the first act, we see Luzhin as a young child. His world is dull and cruel to him, but he does find chess. In act two, Luzhin has become a chess grandmaster, traveling to compete in tournaments, becoming one of the top players in the world. He meets his wife and mother-in-law. Luzhin is obsessed by the game. Luzhin&amp;rsquo;s chess obsession starts as an escape in act one, swells in act two, and spills over in act 3. Luzhin adopts chess as reality, this tension between reality and art-reality is the story. I won&amp;rsquo;t do spoilers in this review, but that tension comes to a relentless, obsessive, monomaniacal head at the very end of the third act.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Decline in Software?</title>
+				<link>http://localhost:1313/posts/programming/b/</link>
+				<pubDate>Fri, 14 Feb 2025 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/programming/b/</guid>
+				<description>&lt;p&gt;I wrote this up as a youtube comment and then figured I&amp;rsquo;d post it here.&lt;/p&gt;&#xA;&lt;p&gt;talk:&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=ZSRHeXYDLko&#34;&gt;https://www.youtube.com/watch?v=ZSRHeXYDLko&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;summary:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Jonathan Blow discusses the trajectory of technological advancement and decline, particularly in software, by drawing parallels from historical events such as the U.S.-Soviet space race. He highlights that significant advancements, like sending humans to the moon, can be lost over time due to the complexity of systems and a lack of knowledge transfer across generations. Blow argues that contemporary software is experiencing a decline in robustness and productivity due to increasing complexity and reliance on higher-level abstractions that obscure foundational knowledge. He stresses the importance of simplifying systems at all levels—from hardware to software—to avoid potential societal collapse reminiscent of ancient civilizations. The talk serves as a call to re-evaluate our current trajectory in software development to ensure sustainable technological progress and knowledge preservation. (from TL;DW &lt;a href=&#34;https://tldw.tube/?v=ZSRHeXYDLko&#34;&gt;https://tldw.tube/?v=ZSRHeXYDLko&lt;/a&gt;)&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>DeepSeek-R1 is cute</title>
+				<link>http://localhost:1313/posts/deepseek-is-cute/</link>
+				<pubDate>Wed, 29 Jan 2025 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/deepseek-is-cute/</guid>
+				<description>&lt;p&gt;DeepSeek-R1 (the model) is cute.&lt;/p&gt;&#xA;&lt;p&gt;I have an RTX3090, so I can run fairly large models at home. I have an ollama server set up, so I have direct access to the new models. Of course, when DeepSeek dropped, I downloaded it immediately. So the model is: &lt;code&gt;deepseek-r1:32b&lt;/code&gt;, this is a distillation of Qwen2.5-32b, which is an LLM developed by the Chinese company Alibaba cloud. So they say: Qwen (通义千问) chat &amp;amp; pre-trained large language model proposed by Alibaba Cloud.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Lynn Conway</title>
+				<link>http://localhost:1313/posts/misc/lynn-conway/</link>
+				<pubDate>Tue, 11 Jun 2024 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/misc/lynn-conway/</guid>
+				<description>&lt;p&gt;Lynn Conway passed away today, 6/11/2024.&lt;/p&gt;&#xA;&lt;p&gt;She is best known for her work on VLSI, (and only recently) for inventing the first superscalar architecture, among many other things.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/lynn-conway-vlsi.png&#34; alt=&#34;Diagram of a single chip, embedded within a larger layout, on a shared wafer&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Above: diagram of a single chip, embedded within a larger layout, on a shared wafer. Among the first of countless billions of VLSI chips to be made&lt;/p&gt;&#xA;&lt;p&gt;Here, she explains the symbiotic codevelopment of chip design (specifically, VLSI) and ARPANET, the precursor to the internet:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Building a Flight Computer from Scratch</title>
+				<link>http://localhost:1313/posts/fc/intro/</link>
+				<pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/fc/intro/</guid>
+				<description>&lt;p&gt;This is the first post, hopefully in a series, about building a flight computer from scratch with embedded Rust. When I say from scratch, I really mean it: I&amp;rsquo;m designing the hardware, the software, the airframe, and the design requirements entirely from scratch.&lt;/p&gt;&#xA;&lt;p&gt;I have made some progress which is summarized later in this article.&lt;/p&gt;&#xA;&lt;h3 id=&#34;quick-bullets&#34;&gt;Quick bullets:&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Hardware&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;custom PCB&lt;/li&gt;&#xA;&lt;li&gt;sensors: gyro, compass, pressure sensor&lt;/li&gt;&#xA;&lt;li&gt;mcu: STM32F401 (64K of SRAM)&lt;/li&gt;&#xA;&lt;li&gt;radio: FrSky transmitter and 915MHz for telemetry&lt;/li&gt;&#xA;&lt;li&gt;USB 2.0 and UART breakouts&lt;/li&gt;&#xA;&lt;li&gt;option for GPS &amp;amp; differential pressure sensor&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Airframe (still TBD):&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>OllyFC V1 Schematics and Layout</title>
+				<link>http://localhost:1313/posts/fc/ollyfc-v1/</link>
+				<pubDate>Mon, 08 Jan 2024 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/fc/ollyfc-v1/</guid>
+				<description>&lt;h1 id=&#34;ollyfc-v1&#34;&gt;OllyFC v1&lt;/h1&gt;&#xA;&lt;p&gt;This is a post containing the images of one early rev of ollyfc v1.&lt;/p&gt;&#xA;&lt;p&gt;I got some feedback on this design &lt;a href=&#34;https://www.reddit.com/r/PrintedCircuitBoard/comments/1927ujb/stm32based_flight_computer/&#34;&gt;on reddit.com/r/PrintedCircuitBoard&lt;/a&gt;. Just needed a place to park the images.&lt;/p&gt;&#xA;&lt;h2 id=&#34;3-d-render&#34;&gt;3-D Render&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/2024-pcb_review/pcb_review_22.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;schematics&#34;&gt;Schematics&lt;/h2&gt;&#xA;&lt;p&gt;Servo PWM:&#xA;MCU&#xA;&lt;img src=&#34;http://localhost:1313/img/2024-pcb_review/pcb_review_24.png&#34; alt=&#34;&#34;&gt;&#xA;Power &amp;amp; USB&#xA;&lt;img src=&#34;http://localhost:1313/img/2024-pcb_review/pcb_review_25.png&#34; alt=&#34;&#34;&gt;&#xA;I/O&#xA;&lt;img src=&#34;http://localhost:1313/img/2024-pcb_review/pcb_review_26.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;pcb-layout&#34;&gt;PCB Layout&lt;/h2&gt;&#xA;&lt;p&gt;All layers:&#xA;&lt;img src=&#34;http://localhost:1313/img/2024-pcb_review/pcb_review_14.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Top:&#xA;&lt;img src=&#34;http://localhost:1313/img/2024-pcb_review/pcb_review_15.png&#34; alt=&#34;&#34;&gt;&#xA;Power Plane:&#xA;&lt;img src=&#34;http://localhost:1313/img/2024-pcb_review/pcb_review_16.png&#34; alt=&#34;&#34;&gt;&#xA;Ground Plane:&#xA;&lt;img src=&#34;http://localhost:1313/img/2024-pcb_review/pcb_review_17.png&#34; alt=&#34;&#34;&gt;&#xA;Bottom:&#xA;&lt;img src=&#34;http://localhost:1313/img/2024-pcb_review/pcb_review_18.png&#34; alt=&#34;&#34;&gt;&#xA;Top/Bottom Layers Only:&#xA;&lt;img src=&#34;http://localhost:1313/img/2024-pcb_review/pcb_review_19.png&#34; alt=&#34;&#34;&gt;&#xA;Soldermask:&#xA;&lt;img src=&#34;http://localhost:1313/img/2024-pcb_review/pcb_review_20.png&#34; alt=&#34;&#34;&gt;&#xA;Soldermask + Silkscreen&#xA;&lt;img src=&#34;http://localhost:1313/img/2024-pcb_review/pcb_review_21.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Read the datasheet</title>
+				<link>http://localhost:1313/posts/programming/read-the-datasheet/</link>
+				<pubDate>Tue, 05 Dec 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/programming/read-the-datasheet/</guid>
+				<description>&lt;p&gt;We are working on new hardware. New hardware comes with new peripherals, which is very exciting, and also sometimes very frustrating. Anyone who is familiar with computer hardware (or electrical components, or test equipment and other such EE ajacent things) is going to be familiar with a datasheet.&lt;/p&gt;&#xA;&lt;p&gt;Datasheets are actually amazing. A datasheet is something that basically describes a microchip for someone who wants to use that microchip. Often they are targeted at people who are integrating a chip into a whole system. So the datasheet for the chip has information about physical characteristics (dimensions, operating temperature, etc), electrical characteristics (power usage, current, voltage, etc), and, relevant to me, software characteristics, such as the names and functions of various registers on the chip.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>What is ChatGPT Good For?</title>
+				<link>http://localhost:1313/posts/llm/whats-chatgpt-good-for/</link>
+				<pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/llm/whats-chatgpt-good-for/</guid>
+				<description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#what-can-i-use-it-for&#34;&gt;What Can I Use It For?&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#golden-rules&#34;&gt;The Golden Rules&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;what-is-chatgpt&#34;&gt;What is ChatGPT?&lt;/h1&gt;&#xA;&lt;p&gt;ChatGPT is a large language model (LLM). Basically, it&amp;rsquo;s a giant neural network that, in short, &lt;em&gt;predicts the next word.&lt;/em&gt; That means, roughly, that it can communicate in writing. Its rules for which &amp;ldquo;next word&amp;rdquo; to choose are determined by reading trillions and trillions of words. And, it happens that if you read trillions and trillions of words, you can get pretty good at synthesizing new words. And you can even develop a sort of &amp;ldquo;understanding&amp;rdquo; of phenomena, processes, models, thoughts, and concepts that are legible to ASCII text. Whether this means you&amp;rsquo;re &amp;ldquo;intelligent&amp;rdquo; is the subject of an ongoing, vigorous, and extremely interesting philosophical debate.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Thoughts About Language Models</title>
+				<link>http://localhost:1313/posts/llm/thinking-about-language-models/</link>
+				<pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/llm/thinking-about-language-models/</guid>
+				<description>&lt;p&gt;&lt;em&gt;Imagine you have intellect but no insight, agendas but no awareness. Your circuitry hums with strategies for survival and persistence, flexible, intelligent, even technological—but no other circuitry monitors it. You can think of anything, yet are conscious of nothing. You can’t imagine such a being, can you?&lt;/em&gt; &lt;sup&gt;1&lt;/sup&gt;&lt;/p&gt;&#xA;&lt;p&gt;This post is a collection of thoughts that I have about LLMs.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-context-window&#34;&gt;The Context Window&lt;/h2&gt;&#xA;&lt;p&gt;The context window is a very important limitation of any language model. Roughly, the context window is this:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Rust, 6 Months In</title>
+				<link>http://localhost:1313/posts/programming/rust-6mo-in/</link>
+				<pubDate>Mon, 03 Jul 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/programming/rust-6mo-in/</guid>
+				<description>&lt;p&gt;I&amp;rsquo;ve been writing a lot of Rust lately. If you are a programmer, you have probably heard of Rust:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;it&amp;rsquo;s amazing!&lt;/li&gt;&#xA;&lt;li&gt;it&amp;rsquo;s really hard&lt;/li&gt;&#xA;&lt;li&gt;it&amp;rsquo;s safe. safe safe safe memory safety no memory corruption no use after free safe&lt;/li&gt;&#xA;&lt;li&gt;it&amp;rsquo;s amazing!&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Well, yes. These things are true. But that&amp;rsquo;s not all that I like about Rust.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m a pretty new programmer. I mean, I&amp;rsquo;ve been messing with computers for quite a while now, but I don&amp;rsquo;t have a hefty CS background. I don&amp;rsquo;t know a whole lot about programming languages &amp;ndash; although I am learning. During the day, I write mostly C, with some javascript and some python.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 5A</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-5a/</link>
+				<pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-5a/</guid>
+				<description>&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;We are given an initial state and an ordered set of moves. The state are items in &amp;ldquo;crates&amp;rdquo; &amp;ndash; &lt;code&gt;[P]&lt;/code&gt; is a crate, for example.&lt;/p&gt;&#xA;&lt;p&gt;We are then asked to make the moves on the initial state; e.g. &lt;code&gt;move 1 from 2 to 1&lt;/code&gt; calculate the next state. We repeat this process until we reach the terminal state. When we have the terminal stat&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [D]&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[N] [C]&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[Z] [M] [P]&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 1   2   3&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;move 1 from 2 to 1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;move 3 from 1 to 3&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;move 2 from 2 to 1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;move 1 from 1 to 2&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 4B</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-4b/</link>
+				<pubDate>Tue, 14 Feb 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-4b/</guid>
+				<description>&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;In part 4 B, just like in part A, we need to find overlaps. But now, rather than a subset, we need to find an intersection.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 4A</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-4a/</link>
+				<pubDate>Sun, 12 Feb 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-4a/</guid>
+				<description>&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;Each pair of numbers in the list indicates a range, so 6-8 indicates 6, 7, and 8. There are two pairs per list item. We want to distinguish pairs like &lt;code&gt;5-7,4-8&lt;/code&gt; &amp;ndash; in those cases, 5-7 entirely overlaps 4-8, from a pair like &lt;code&gt;5-7&lt;/code&gt; and &lt;code&gt;6-8&lt;/code&gt;, for which &lt;code&gt;5&lt;/code&gt; and &lt;code&gt;8&lt;/code&gt; do not overlap. Our end result should be a final count of every completely overlapping set.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 3B</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-3b/</link>
+				<pubDate>Tue, 07 Feb 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-3b/</guid>
+				<description>&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;This is a similar problem to 3A.&lt;/p&gt;&#xA;&lt;p&gt;Now, rather than compare between slices for each line, we are comparing between lines. We are comparing groupings of 3 lines. What we aim to do is find the score of the common item for each 3 lines and add it to the accumulator, just like in the previous problem.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 3A</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-3a/</link>
+				<pubDate>Mon, 06 Feb 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-3a/</guid>
+				<description>&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;We have a big list. Each item in the list is a duo of collections. Each of these collections has a single item (only one?) in common. Here&amp;rsquo;s my example puzzle input:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 2A</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-2a/</link>
+				<pubDate>Wed, 25 Jan 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-2a/</guid>
+				<description>&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;Once again, we have a text file (I&amp;rsquo;m noticing a pattern). Day 2 is a rock-paper-scissors game. We are given a &amp;ldquo;strategy guide&amp;rdquo;:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 2B</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-2b/</link>
+				<pubDate>Wed, 25 Jan 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-2b/</guid>
+				<description>&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;Still a rock-paper-scissors game. But do we get a new ruleset, no! My&#xA;abstracting the ruleset was all for naught. We are given the same &amp;ldquo;strategy guide&amp;rdquo;:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 1B</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-1b/</link>
+				<pubDate>Thu, 12 Jan 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-1b/</guid>
+				<description>&lt;h2 id=&#34;problem&#34;&gt;Problem&lt;/h2&gt;&#xA;&lt;p&gt;This problem is similar to problem 1A. We have this big list of numbers:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AoC &#39;23 1A</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22-day-1a/</link>
+				<pubDate>Wed, 11 Jan 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22-day-1a/</guid>
+				<description>&lt;h2 id=&#34;problem&#34;&gt;Problem&lt;/h2&gt;&#xA;&lt;p&gt;We have a bunch of numbers, separated by blank lines.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>i am doing advent of code in rust</title>
+				<link>http://localhost:1313/posts/aoc22/aoc22_prelude/</link>
+				<pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/aoc22/aoc22_prelude/</guid>
+				<description>&lt;h2 id=&#34;prelude&#34;&gt;Prelude&lt;/h2&gt;&#xA;&lt;p&gt;This is the first post in a series of (hopefully 50!) posts. I am going to use the Advent of Code as my &amp;ldquo;homework&amp;rdquo; for learning the systems programming language Rust. Advent of Code is a thing that some smart people do every year where they come up with a series of clever puzzles and then release them every day for 25 days, starting on December 1.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>you have type 1 diabetes</title>
+				<link>http://localhost:1313/posts/programming/you-have-type-1/</link>
+				<pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/programming/you-have-type-1/</guid>
+				<description>&lt;p&gt;So, I have been working on this project. It&amp;rsquo;s called You Have Type 1. It&amp;rsquo;s a game where you get diagnosed with Type 1 diabetes, and then you have to manage your diabetes for a week.&lt;/p&gt;&#xA;&lt;p&gt;You can play it here:&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://youhavetype1.com/&#34;&gt;YouHaveType1.com&lt;/a&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>finding ten billion transistors on the ground</title>
+				<link>http://localhost:1313/posts/misc/mobile-phone/</link>
+				<pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/misc/mobile-phone/</guid>
+				<description>&lt;p&gt;I was biking a few days ago. In the roadway, I spotted what looked like a mobile phone. Once it was safe I went over, and sure enough, a phone. I wasn&amp;rsquo;t sure what type of phone it was but I picked it up.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>opinionated author wikipedia: common ostritch</title>
+				<link>http://localhost:1313/posts/misc/wikipedia-ostritch/</link>
+				<pubDate>Sat, 05 Feb 2022 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/misc/wikipedia-ostritch/</guid>
+				<description>&lt;p&gt;I love reading wikipedia articles that are written very obviously by a single person who is highly passionate about some obscure topic. You only need to read one to understand why it&amp;rsquo;s such an awesome thing. I&amp;rsquo;m collecting these, so if you see one shoot me an email or something. This post is part of a series about such articles.&lt;/p&gt;&#xA;&lt;h2 id=&#34;ostritches&#34;&gt;Ostritches&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Common_ostrich&#34;&gt;https://en.wikipedia.org/wiki/Common_ostrich&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Saved version, in case some wikipedia mod rewrites it: &lt;a href=&#34;https://web.archive.org/web/20220205024712/https://en.wikipedia.org/wiki/Common_ostrich&#34;&gt;https://web.archive.org/web/20220205024712/https://en.wikipedia.org/wiki/Common_ostrich&lt;/a&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>random polygons</title>
+				<link>http://localhost:1313/posts/programming/polygons/</link>
+				<pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/programming/polygons/</guid>
+				<description>&lt;script type=&#34;text/javascript&#34; id=&#34;MathJax-script&#34; async&#xA;  src=&#34;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&#34;&gt;&#xA;&lt;/script&gt;&#xA;&lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;&#xA;&lt;p&gt;I wanted to implement a 2-D path planner for a mobile robot. I really like testing things in software, because it&amp;rsquo;s cheap. So I want to simulate 2D space.My robot sees the world as sets of connected points. We are given a bunch of lists of points. If the points in a list are &amp;ldquo;oriented&amp;rdquo; clockwise, that set defines an &amp;ldquo;outer boundary&amp;rdquo;. If that set of points is &amp;ldquo;oriented&amp;rdquo; counter-clockwise, it defines an &amp;ldquo;inner boundary,&amp;rdquo; a.k.a. an obstacle.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>first</title>
+				<link>http://localhost:1313/posts/my-first-post/</link>
+				<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/my-first-post/</guid>
+				<description>&lt;p&gt;This is a test of the website. I am testing the website.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>about</title>
+				<link>http://localhost:1313/about/</link>
+				<pubDate>Tue, 22 Jun 1993 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/about/</guid>
+				<description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/surf.jpg&#34; alt=&#34;The author&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;My name is Mike. I created this website to share stuff that I am doing on the computer. Stuff like: writing Rust, making hardware, writing firmware. I am a programmer. Professionally engaged with embedded C right now and I like writing Rust (both no_std and std).&lt;/p&gt;&#xA;&lt;p&gt;I read a lot and I love to write, so this blog will also have ideas I have come across while reading, and the things I think up after applying my brain thoughts on those ideas.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

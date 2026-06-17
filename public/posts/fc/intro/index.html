@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="description" content="This is the first post, hopefully in a series, about building a flight computer from scratch with embedded Rust. When I say from scratch, I really mean it: I&rsquo;m designing the hardware, the software, the airframe, and the design requirements entirely from scratch.
+I have made some progress which is summarized later in this article.
+Quick bullets:
+
+
+Hardware
+
+custom PCB
+sensors: gyro, compass, pressure sensor
+mcu: STM32F401 (64K of SRAM)
+radio: FrSky transmitter and 915MHz for telemetry
+USB 2.0 and UART breakouts
+option for GPS &amp; differential pressure sensor
+
+
+
+Airframe (still TBD):"> 
+
+  <title>
+    
+    Building a Flight Computer from Scratch
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  <link rel="stylesheet" href='http://localhost:1313/css/main.css' />
+  
+
+
+</head><body a="auto"><header>
+  
+
+  <h1>mike&#39;s website</h1><p>writing, mostly about technology</p></header><main class="page-content" aria-label="Content">
+<a href="/">&lt;&lt;&lt;</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2024-02-01 00:00:00 &#43;0000 UTC">
+            Feb &#39;24
+        </time>
+    </p>
+
+    <h1>Building a Flight Computer from Scratch</h1>
+
+    
+
+
+    <p>This is the first post, hopefully in a series, about building a flight computer from scratch with embedded Rust. When I say from scratch, I really mean it: I&rsquo;m designing the hardware, the software, the airframe, and the design requirements entirely from scratch.</p>
+<p>I have made some progress which is summarized later in this article.</p>
+<h3 id="quick-bullets">Quick bullets:</h3>
+<ul>
+<li>
+<p>Hardware</p>
+<ul>
+<li>custom PCB</li>
+<li>sensors: gyro, compass, pressure sensor</li>
+<li>mcu: STM32F401 (64K of SRAM)</li>
+<li>radio: FrSky transmitter and 915MHz for telemetry</li>
+<li>USB 2.0 and UART breakouts</li>
+<li>option for GPS &amp; differential pressure sensor</li>
+</ul>
+</li>
+<li>
+<p>Airframe (still TBD):</p>
+<ul>
+<li>glider airframe, optimized for flight time</li>
+<li>power: probably 2S or 3S</li>
+<li>wingspan: ~6m</li>
+<li>weight: ~1kg</li>
+</ul>
+</li>
+<li>
+<p>Software:</p>
+<ul>
+<li>embedded (no_std) Rust</li>
+<li>stm32f4xx-hal. 1 custom driver so far.</li>
+<li>RTIC for RTOS. Maybe a custom RTOS</li>
+<li>Companion GUI application for configuration and data download, also Rust</li>
+</ul>
+</li>
+</ul>
+<p>I am planning for this to be a glider airframe, optimized for long-term loitering. I think eventually I want to put a camera up there and experiment with computer vision, but that has to come in a year when I have the flight computer working. The reason for a glider is that it&rsquo;s a combined hardware + software challenge and perhaps a bit different than what most people are doing with their RC airframes.</p>
+<h3 id="why">Why?</h3>
+<p>The real purpose of this project is to learn. I am focused on the difficult parts: embedded Rust (which after solid year I don&rsquo;t feel is that difficult), control theory and aerodynamics, and hardware design. I am not too interested in airframe design. There are a few things that I am <em>not</em> trying to do:</p>
+<ul>
+<li>use off-the-shelf stuff (like pixhawk or ardupilot) or a pre-manufactured airframe</li>
+<li>develop my own airframe. I&rsquo;m planning to use an already existing design from the youtube channel Experimental Airlines.</li>
+<li>build a super high performing aircraft or do anything super exotic (aside from maximize flight time)</li>
+<li>sell anything or start a business
+<ul>
+<li>although I may sell at cost so other people can use it and give me feedback</li>
+</ul>
+</li>
+</ul>
+<h1 id="hardware-current-progress">Hardware: Current Progress</h1>
+<p>So far, I have produced 3 hardware prototypes.</p>
+<p><img src="/img/ollyfc/boards-huge.webp" alt="Left to Right: v3, v2, and v1 of the baord."></p>
+<h2 id="v1-hardware">V1 Hardware</h2>
+<p>The first version of the OllyFC flight computer was designed in late 2023. The units arrived from JLCPCB in January.</p>
+<p>Unfortunately, the design had the boot0 pin floating. I&rsquo;m not sure if this is a critical design flaw, but it is specifically pointed out <a href="https://probe.rs/docs/knowledge-base/troubleshooting/">by probe-rs</a> as an issue that prevents debugging and flashing:</p>
+<blockquote>
+<p>On STM32 series chips, check the state of the BOOT0 pin:</p>
+<ul>
+<li>If BOOT0 is HIGH or floating, the core will run from internal bootloader instead of flashed firmware.</li>
+<li>BOOT0 should be pulled LOW for SWD programming, however even if it is HIGH or floating, programming may appear to succeed but firmware will not properly run.</li>
+</ul>
+</blockquote>
+<p>You can see the intended layout.</p>
+<p><img src="/img/ollyfc/hw_v1_labeled.webp" alt="v1 labeled image"></p>
+<p>The purple rectangle is sized 30.5mm x 30.5mm, which is the standard size for a
+drone power distribution board. These are cheap and do the difficult electrical work of converting the high voltage battery power to a stable 5V.</p>
+<p>Unfortunately, this board doesn&rsquo;t work. Lesson learned?</p>
+<h2 id="v2-hardware">V2 Hardware</h2>
+<p>I found a number of other issues with the V1 board, so the v2 board was almost a complete redesign. The v2 board has a few differences:</p>
+<ul>
+<li>hand soldered SPI flash on the back, instead of on the front</li>
+<li>shrouded male debug port, instead of unshrouded</li>
+<li>More LEDs</li>
+<li>Eliminated the fuel gauge.</li>
+<li>Added GPS port with uFL antenna connector.</li>
+<li>Broke out UART pins onto connectors for additional IO.</li>
+<li>Test points on the rear</li>
+<li>Added a buzzer</li>
+</ul>
+<p>And other various small component changes. The mechanical connection to the 30.5mm x 30.5mm drone PDB is retained.</p>
+<p>The PWM IC is the same, but the package changed to a cheaper and more available JLCPCB part.</p>
+<p><img src="/img/ollyfc/hw_v2_labeled.webp" alt="v2 labeled image"></p>
+<p>Unfortunately, this board has a critical flaw: the PWM chip has a short across VDD and VSS. So I think what happens is that the current will flow e.g. through extclk, or A0-A5 to ground, instead of through VSS.</p>
+<p><img src="/img/ollyfc/hw_v2_short.png" alt="Sleep deprivation and no review of the schematic. Bad decisions made."></p>
+<p>I knew I had a short, because I could feel the heat from the excess current flowing through the power path IC and the LDO, and eventually found that the component itself was heating up significantly.</p>
+<p>This was pretty devastating, because it seemed like a $150 mistake and no additional progress could be made. However, because I opted to use an expensive power path IC, the current was limited which prevented major damage to the other components on the board.</p>
+<p>Upon removing the offending IC, the chip powered on and could be flashed. None of the other components were affected. This was great news, becuase I could do bringup on some of the other components while I revised the board.</p>
+<p>In hindsight, there were a number of issues with this board, too:</p>
+<ul>
+<li>PWM still not sufficiently isolated from the ST</li>
+<li>Used an expensive uncommon STM32F411 instead of an inexpensive STM32F401</li>
+<li>Used a u.FL antenna connector instead of a more common SMA</li>
+<li>All LEDs were reversed. This wasn&rsquo;t strictly my fault, since I used
+footprints from EasyEDA but symbols from KiCad. They were reversed, so
+all of the LEDs were plugged in backwards on the board and hence none
+of them worked. Lesson learned: double check your footprints!</li>
+<li>The buzzer was also incorrectly connected: I had it on one of the negative
+complementary timer channels, instead of the positive channels. My HAL does
+not support having output on a complementary channel (and I&rsquo;m not sure if this
+is true in general, or just with that particular HAL), so that meant no
+buzzer.</li>
+<li>RTC battery is quite small and an unknown type. And, no low speed crystal. I
+don&rsquo;t want to be stuck buying hard-to-find batteries.</li>
+</ul>
+<h2 id="v3-hardware">V3 Hardware</h2>
+<p><img src="/img/ollyfc/hw_v3_labeled_med.webp" alt="The v3 hardware. It seems to be working out of the box so far"></p>
+<p>After the resounding success of the v2 silkscreen, I went with a significantly more intricate and complex logo for this board, based off of the <a href="https://en.wikipedia.org/wiki/California_least_tern">California Least Tern</a> which is native to San Diego.</p>
+<p><a href="/img/ollyfc/hw_v3_labeled_huge.webp">larger image</a></p>
+<p>This board is working well so far and is probably pretty close to the finalized product provided there are no bring-up issues.</p>
+<p>This board has the following major components:</p>
+<ul>
+<li><a href="https://www.st.com/en/microcontrollers-microprocessors/stm32f401cb.html">MCU: STM32F401cb</a></li>
+<li><a href="https://www.digikey.com/en/products/detail/amphenol-advanced-sensors/NPA-730B-10WD/9951473">Differential Pressure Sensor: NPA-730B-10WD</a></li>
+<li><a href="https://www.ti.com/product/HDC1080">Temperature/Humidity Sensor: TI HDC1080</a></li>
+<li><a href="https://www.bosch-sensortec.com/products/motion-sensors/imus/bmi088/u-">IMU: Bosch Sensortec BMI088</a></li>
+<li><a href="https://www.u-blox.com/en/product/neo-m8-series">GPS: u-blox NEO M8N</a></li>
+<li><a href="https://www.nxp.com/products/power-management/lighting-driver-and-controller-ics/led-controllers/16-channel-12-bit-pwm-fm-plus-ic-bus-led-controller:PCA9685">PWM: NXP PCA9685</a></li>
+<li><a href="https://www.winbond.com/hq/product/code-storage-flash-memory/serial-nor-flash/?__locale=en&amp;partNo=W25Q128JV">SPI Flash: Winbond W25Q128JVS</a></li>
+<li><a href="https://www.digikey.com/en/products/detail/texas-instruments/TPS2113ADRBR/2353703">Power Path: TI TPS2113ADRBR</a></li>
+</ul>
+<p>The u-blox module and differential pressure sensor are both expensive, somewhat unnecessary, and large enough to be soldered on. So I did not have my assembly house do it, instead I am going to purchase those components and do the assembly myself.</p>
+<p>A few things were changed on the v3 board:</p>
+<ul>
+<li>Larger buzzer. It has better acoustic properties. Unfortunately, it&rsquo;s a little quiet (too much filtering), but it&rsquo;s still audible at the resonant frequency of ~2800kHz.</li>
+<li>Larger battery. It&rsquo;s a more common CR2032 type instead of the tiny batteries I had on the old board.</li>
+<li>Smaller buttons, which make it a lot easier to lay out the board.</li>
+<li>JST-GH connectors for the external SPI and the UART out. And, rather than placing them myself (like the old JST-PH connectors on the other board) I just had the assembly house do it.</li>
+<li>Likewise for the SBus connection. The FrSky radios have a JST-SH cable included so it is plug and play with the radio.</li>
+<li>Larger board made it much much easier to lay out. There is some &ldquo;empty space&rdquo; (corners, by the LDO, by the buzzer) but it&rsquo;s still plenty compact enough and is a much cleaner layout.</li>
+<li>Isolation between the high-current parts and low-current parts of the board.The other two boards had a ground plane which extended under the entire board; this one has a gap next to the power path (where the 3v3 power comes in/out of the board from the LDO) I&rsquo;m hoping this can diminish noise on the low-current portion, especially around the antenna.</li>
+<li>Fuel gauge inputs. I had ditched the fuel gauge IC from the v1 version, because the assembly house didn&rsquo;t have it in stock, I didn&rsquo;t do much paying attention to the details of integrating it so it was a bit half-baked, and I also don&rsquo;t even NEED a fuel gauge IC, because the FrSky radio already has one &ndash; it&rsquo;s just an analog input from the battery, through a divider, and into one of the SBus pins.</li>
+<li>2.54mm headers for the servos instead of JST-PH connectors. The connector footprints took up a LOT of space, and it would have been a pain to crimp and connect each servo. I originally had connectors because of vibration, but I have noticed that most RC flight control boards with servos out have the 2.54mm connectors and seem to work just fine.</li>
+<li>Test points on the back of the board. Almost all signal lines, including interrupts, are broken out to test points. If this ends up being the final board design, I will probably manufacture a test harness with push pins to easily test the entire board. I have that bookmarked as a future hardware design project since if I ever put this into production testing will become part of the process.</li>
+</ul>
+<p><img src="/img/ollyfc/hw_v3_rear.webp" alt="The back of the v3 board. The buzzer is absolutely enormous. But look at how many test points we have!"></p>
+
+</article>
+
+    </main>
+</body></html>

@@ -1,5 +1,5 @@
 ---
-title: "📚 Review: The Defense, Nabokov"
+title: "Review: The Defense, Nabokov"
 date: 2025-02-19
 tags: ['literature']
 draft: False

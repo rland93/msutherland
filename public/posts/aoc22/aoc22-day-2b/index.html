@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="description" content="Problem Statement
+Still a rock-paper-scissors game. But do we get a new ruleset, no! My
+abstracting the ruleset was all for naught. We are given the same &ldquo;strategy guide&rdquo;:"> 
+
+  <title>
+    
+    AoC &#39;23 2B
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  <link rel="stylesheet" href='http://localhost:1313/css/main.css' />
+  
+
+
+</head><body a="auto"><header>
+  
+
+  <h1>mike&#39;s website</h1><p>writing, mostly about technology</p></header><main class="page-content" aria-label="Content">
+<a href="/">&lt;&lt;&lt;</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2023-01-25 00:00:00 &#43;0000 UTC">
+            Jan &#39;23
+        </time>
+    </p>
+
+    <h1>AoC &#39;23 2B</h1>
+
+    
+
+
+    <h2 id="problem-statement">Problem Statement</h2>
+<p>Still a rock-paper-scissors game. But do we get a new ruleset, no! My
+abstracting the ruleset was all for naught. We are given the same &ldquo;strategy guide&rdquo;:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>A Y
+</span></span><span style="display:flex;"><span>B X
+</span></span><span style="display:flex;"><span>C Z
+</span></span></code></pre></div><p>But is X, Y, Z my move? No it is not (we learn that the elf meant to say something different). The X, Y, and Z in part 2 indicates the round result that we <em>should have gotten</em> &ndash; loss, win, or draw.</p>
+<p>This turns out to be a very simple change, in part because we <em>didn&rsquo;t</em> abstract away the game logic and instead dealt with game states directly in our switch statement. Saved again by our lack of <a href="https://www.youtube.com/watch?v=74RdET79q40">premature optimization</a>.</p>
+<h2 id="first-sketch">First Sketch</h2>
+<p>Now. All we are doing is changing the scoring logic. Here&rsquo;s our old logic:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    switch (mine, theirs):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;A&#34;</span>, <span style="color:#e6db74">&#34;X&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;B&#34;</span>, <span style="color:#e6db74">&#34;X&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;C&#34;</span>, <span style="color:#e6db74">&#34;X&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;A&#34;</span>, <span style="color:#e6db74">&#34;Y&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;B&#34;</span>, <span style="color:#e6db74">&#34;Y&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;C&#34;</span>, <span style="color:#e6db74">&#34;Y&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;A&#34;</span>, <span style="color:#e6db74">&#34;Z&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;B&#34;</span>, <span style="color:#e6db74">&#34;Z&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;C&#34;</span>, <span style="color:#e6db74">&#34;Z&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><p>And here&rsquo;s the new:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    switch (mine, theirs):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;A&#34;</span>, <span style="color:#e6db74">&#34;X&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;B&#34;</span>, <span style="color:#e6db74">&#34;X&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;C&#34;</span>, <span style="color:#e6db74">&#34;X&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;A&#34;</span>, <span style="color:#e6db74">&#34;Y&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;B&#34;</span>, <span style="color:#e6db74">&#34;Y&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;C&#34;</span>, <span style="color:#e6db74">&#34;Y&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;A&#34;</span>, <span style="color:#e6db74">&#34;Z&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;B&#34;</span>, <span style="color:#e6db74">&#34;Z&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;C&#34;</span>, <span style="color:#e6db74">&#34;Z&#34;</span> <span style="color:#f92672">=&gt;</span> score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>We can look at the difference on a single line to see how we changed the game
+logic. Let&rsquo;s look at &ldquo;A&rdquo; and &ldquo;X&rdquo;. Recall: &ldquo;A&rdquo; means that the opponent played
+Rock. In the old logic, &ldquo;X&rdquo; means I played Rock; in the new logic, &ldquo;X&rdquo; means I
+lost the game (but we use the game rules to deduce and score what I played!)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>     &#34;A&#34;,    &#34;X&#34;,    Result
+</span></span><span style="display:flex;"><span>Old  rock    rock  we both played rock, so we tied.
+</span></span><span style="display:flex;"><span>New  rock    lost  I lost, so I played scissors.
+</span></span></code></pre></div><p>Our new scoring takes into account the result of acquiring the desired win/loss
+condition. If my opponent plays rock and I lost, then that must mean I played
+scissors and therefore should be scored accordingly.</p>
+<p>Why was this such an easy change to make? Well, it&rsquo;s because what we really did
+with this <code>switch</code> statement (remember, we <em>could</em> have written separate
+functions for game logic!) is just list out every possible game state. There are
+only 9 of them, which means there are only 9 different ways to score a game,
+which means that if we just change those 9 numbers in the right way, we don&rsquo;t
+need to write any game logic at all!</p>
+<p>At first, I thought it was a little silly that they made such an insignificant change in the game rules &ndash; my solution to part 2 is not much different at all from my solution in part 1! Boring!</p>
+<p>Actually, it&rsquo;s interesting to think of the game logic as a <a href="https://en.wikipedia.org/wiki/Finite-state_machine">finite state machine</a>. Rather than write a bunch of game logic, we just wrote out all the states in our FSM. We were able to do this because of the deterministic structure of our game.</p>
+<h2 id="solution">Solution</h2>
+<p>It&rsquo;s nearly the same.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">part_two</span>(input: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; Option<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">u32</span><span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> sum: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> input
+</span></span><span style="display:flex;"><span>        .lines()
+</span></span><span style="display:flex;"><span>        .map(<span style="color:#f92672">|</span>l: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span><span style="color:#f92672">|</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> moves: <span style="color:#66d9ef">&amp;</span>[<span style="color:#66d9ef">u8</span>] <span style="color:#f92672">=</span> l.as_bytes();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> (moves[<span style="color:#ae81ff">0</span>], moves[<span style="color:#ae81ff">2</span>]);
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        .map(<span style="color:#f92672">|</span>(left, right)<span style="color:#f92672">|</span> <span style="color:#66d9ef">match</span> (left, right) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// lose
+</span></span></span><span style="display:flex;"><span>            (<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;A&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;X&#39;</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>            (<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;B&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;X&#39;</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>            (<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;C&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;X&#39;</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// draw
+</span></span></span><span style="display:flex;"><span>            (<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;A&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;Y&#39;</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>            (<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;B&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;Y&#39;</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>            (<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;C&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;Y&#39;</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// win
+</span></span></span><span style="display:flex;"><span>            (<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;A&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;Z&#39;</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>            (<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;B&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;Z&#39;</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>            (<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;C&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;Z&#39;</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>            _ <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">unreachable!</span>(<span style="color:#e6db74">&#34;Bad input </span><span style="color:#e6db74">{:?}</span><span style="color:#e6db74">&#34;</span>, (left, right)),
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        .sum();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Some(sum);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+</article>
+
+    </main>
+</body></html>

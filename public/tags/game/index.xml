@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Game on mike&#39;s website</title>
+		<link>http://localhost:1313/tags/game/</link>
+		<description>Recent content in Game on mike&#39;s website</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/game/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>you have type 1 diabetes</title>
+				<link>http://localhost:1313/posts/programming/you-have-type-1/</link>
+				<pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/programming/you-have-type-1/</guid>
+				<description>&lt;p&gt;So, I have been working on this project. It&amp;rsquo;s called You Have Type 1. It&amp;rsquo;s a game where you get diagnosed with Type 1 diabetes, and then you have to manage your diabetes for a week.&lt;/p&gt;&#xA;&lt;p&gt;You can play it here:&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://youhavetype1.com/&#34;&gt;YouHaveType1.com&lt;/a&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>
